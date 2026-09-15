@@ -1,0 +1,3004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>KOBA – Convenience • Variety • Liquidation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Sans+Ethiopic:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --koba-green: #1E3D2B;
+            --koba-green-light: #2a5a3f;
+            --koba-green-dark: #152b1e;
+            --koba-gold: #C8A24A;
+            --koba-gold-light: #dbb86a;
+            --koba-gold-dark: #a8862e;
+            --koba-white: #FFFFFF;
+            --koba-cream: #f5f0e8;
+            --koba-gray: #8a8a8a;
+            --koba-dark: #1a1a1a;
+            --bg-body: #f5f0e8;
+            --bg-card: #ffffff;
+            --bg-card-hover: #fcfaf7;
+            --bg-header: linear-gradient(145deg, #1E3D2B, #152b1e);
+            --bg-input: #f5f0e8;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a5a;
+            --text-muted: #8a8a9a;
+            --border-color: #e0d8d0;
+            --border-focus: #C8A24A;
+            --accent: #C8A24A;
+            --accent-hover: #a8862e;
+            --accent-glow: rgba(200, 162, 74, 0.3);
+            --whatsapp: #25D366;
+            --whatsapp-hover: #1da85c;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --warning: #eab308;
+            --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.10);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 32px;
+            --radius-xl: 40px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font: 'Montserrat', 'Segoe UI', sans-serif;
+            --font-ethiopic: 'Noto Sans Ethiopic', sans-serif;
+            --header-text: #ffffff;
+            --footer-border: #e2e8f0;
+            --badge-bg: rgba(200, 162, 74, 0.12);
+            --badge-color: #C8A24A;
+            --qty-bg: #f5f0e8;
+            --qty-color: #1a1a2e;
+            --selected-border: #C8A24A;
+            --selected-bg: rgba(200, 162, 74, 0.08);
+            --bottom-bar-bg: rgba(255, 255, 255, 0.96);
+        }
+
+        body.dark-mode {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #273548;
+            --bg-header: linear-gradient(145deg, #1E3D2B, #152b1e);
+            --bg-input: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --border-color: #334155;
+            --border-focus: #C8A24A;
+            --accent: #C8A24A;
+            --accent-hover: #a8862e;
+            --accent-glow: rgba(200, 162, 74, 0.3);
+            --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --header-text: #f1f5f9;
+            --footer-border: #334155;
+            --badge-bg: rgba(200, 162, 74, 0.20);
+            --badge-color: #C8A24A;
+            --qty-bg: #334155;
+            --qty-color: #f1f5f9;
+            --selected-border: #C8A24A;
+            --selected-bg: rgba(200, 162, 74, 0.15);
+            --bottom-bar-bg: rgba(30, 41, 59, 0.96);
+        }
+
+        /* Strict single language handling */
+        body:not(.lang-am-mode) .lang-am { display: none !important; }
+        body:not(.lang-am-mode) .lang-en { display: inline !important; }
+        body:not(.lang-am-mode) blockquote.lang-en,
+        body:not(.lang-am-mode) div.lang-en,
+        body:not(.lang-am-mode) p.lang-en,
+        body:not(.lang-am-mode) span.lang-en-block,
+        body:not(.lang-am-mode) h1.lang-en,
+        body:not(.lang-am-mode) h2.lang-en,
+        body:not(.lang-am-mode) h3.lang-en { display: block !important; }
+
+        body.lang-am-mode .lang-en { display: none !important; }
+        body.lang-am-mode .lang-am { display: inline !important; font-family: var(--font-ethiopic), var(--font); }
+        body.lang-am-mode blockquote.lang-am,
+        body.lang-am-mode div.lang-am,
+        body.lang-am-mode p.lang-am,
+        body.lang-am-mode span.lang-am-block,
+        body.lang-am-mode h1.lang-am,
+        body.lang-am-mode h2.lang-am,
+        body.lang-am-mode h3.lang-am { display: block !important; font-family: var(--font-ethiopic), var(--font); }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg-body);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 1rem 1rem 120px;
+            transition: background 0.4s, color 0.4s;
+            line-height: 1.6;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-body); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+
+        .container { max-width: 1400px; margin: 0 auto; width: 100%; }
+
+        /* HEADER — 2-TIER MODERN DESIGN (MATCHING REFERENCE) */
+        .header {
+            background: #193826;
+            border-radius: 60px;
+            box-shadow: 0 14px 45px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1.5rem;
+            color: var(--header-text);
+            position: sticky;
+            top: 0.8rem;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        /* Top Bar: Brand, Hamburger, Admin Portal, Language, Theme */
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.65rem 1.6rem;
+            gap: 1.2rem;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: #ab8634;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #172d1f;
+            font-size: 1.65rem;
+            font-weight: 900;
+            box-shadow: 0 0 16px rgba(200, 162, 74, 0.45);
+            flex-shrink: 0;
+            border: 2px solid rgba(255, 255, 255, 0.85);
+        }
+
+        .brand-text h1 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            line-height: 1.1;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        .brand-text .tagline {
+            font-size: 0.62rem;
+            color: #c9a44c;
+            font-weight: 800;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+            display: block;
+            margin-top: 3px;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* HAMBURGER BUTTON IN TOP BAR */
+        .mobile-nav-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 1.45rem;
+            cursor: pointer;
+            padding: 0.35rem 0.6rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-toggle:hover {
+            color: var(--koba-gold);
+        }
+
+        /* ADMIN PORTAL PILL BUTTON */
+        .btn-header-admin {
+            background: transparent;
+            border: 1.5px solid #c9a44c;
+            border-radius: 40px;
+            padding: 0.45rem 1.1rem;
+            color: #c9a44c;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font);
+        }
+
+        .btn-header-admin:hover, .btn-header-admin.active {
+            background: #c9a44c;
+            color: #152b1e;
+            box-shadow: 0 4px 16px rgba(200, 162, 74, 0.4);
+        }
+
+        /* LANGUAGE SELECTOR PILL */
+        .lang-selector {
+            display: flex;
+            gap: 0.2rem;
+            background: rgba(0, 0, 0, 0.28);
+            border-radius: 60px;
+            padding: 0.22rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .lang-btn {
+            padding: 0.3rem 0.9rem;
+            border-radius: 40px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 700;
+            font-size: 0.76rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--font);
+        }
+
+        .lang-btn.active {
+            background: #c9a44c;
+            color: #152b1e;
+        }
+
+        /* THEME CIRCLE BUTTON */
+        .theme-btn {
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-btn:hover {
+            background: #c9a44c;
+            color: #152b1e;
+        }
+
+        /* Second Tier: Sub-navigation bar */
+        .header-subnav {
+            background: rgba(0, 0, 0, 0.25);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.45rem 1.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .header-subnav::-webkit-scrollbar {
+            height: 3px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: nowrap;
+        }
+
+        .nav-link {
+            padding: 0.4rem 0.85rem;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+
+        .nav-link i {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--koba-green-dark);
+            background: var(--koba-gold);
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, var(--koba-green-dark), var(--koba-green));
+            padding: 3rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--koba-gold);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(200, 162, 74, 0.15), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-badge-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1.2rem;
+            background: rgba(200, 162, 74, 0.15);
+            border: 1px solid var(--koba-gold);
+            border-radius: 50px;
+            color: var(--koba-gold-light);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .hero h2 {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 900;
+            color: var(--koba-white);
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h2 .highlight { color: var(--koba-gold); }
+
+        .hero-sub {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.05rem;
+            max-width: 650px;
+            margin: 0.9rem auto 0;
+            font-weight: 400;
+        }
+
+        .hero-address {
+            color: var(--koba-gold-light);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.9rem;
+            justify-content: center;
+            margin-top: 1.8rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-cta {
+            padding: 0.75rem 1.8rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-family: var(--font);
+        }
+
+        .btn-cta-gold {
+            background: var(--koba-gold);
+            color: var(--koba-green-dark);
+            box-shadow: 0 4px 20px rgba(200, 162, 74, 0.4);
+        }
+
+        .btn-cta-gold:hover {
+            background: var(--koba-gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(200, 162, 74, 0.6);
+        }
+
+        .btn-cta-outline {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+        }
+
+        .btn-cta-outline:hover {
+            background: #fff;
+            color: var(--koba-green-dark);
+            transform: translateY(-3px);
+        }
+
+        .hero-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            justify-content: center;
+            margin-top: 1.8rem;
+        }
+
+        .feature-pill {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* SEARCH BAR */
+        .search-container {
+            margin: 1.5rem 0 2rem;
+            position: relative;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .search-box i.search-icon {
+            position: absolute;
+            left: 1.4rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.95rem 1.4rem 0.95rem 3.4rem;
+            border-radius: 60px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: var(--font);
+            outline: none;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 5px var(--accent-glow);
+        }
+
+        /* CATEGORY FILTER */
+        .category-filter-section {
+            margin-bottom: 2rem;
+        }
+
+        .category-scroll-wrap {
+            display: flex;
+            gap: 0.6rem;
+            overflow-x: auto;
+            padding: 0.5rem 0.2rem 0.8rem;
+            scrollbar-width: thin;
+        }
+
+        .cat-btn {
+            padding: 0.55rem 1.2rem;
+            border-radius: 50px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            color: var(--text-secondary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: var(--transition);
+            font-family: var(--font);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cat-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .cat-btn.active {
+            background: var(--koba-green);
+            color: #fff;
+            border-color: var(--koba-green);
+            box-shadow: 0 4px 15px rgba(30, 61, 43, 0.25);
+        }
+
+        /* SECTION STYLING */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 2.5rem 0 1.2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.8rem;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-primary);
+        }
+
+        .section-title i { color: var(--koba-gold); }
+
+        .section-tag {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* PRODUCT GRID */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+            box-shadow: var(--shadow-sm);
+            border: 2px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        .product-badge-flag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 0.2rem 0.6rem;
+            border-radius: 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        .badge-special { background: #eab308; color: #000; }
+        .badge-liquidation { background: #ef4444; color: #fff; }
+        .badge-habesha { background: var(--koba-green); color: #fff; }
+        .badge-popular { background: var(--koba-gold); color: #000; }
+
+        .product-image-wrap {
+            width: 130px;
+            height: 130px;
+            margin: 0.5rem 0 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            background: var(--bg-body);
+            padding: 0.4rem;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .product-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image { transform: scale(1.06); }
+
+        .product-card h3 {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 0.3rem;
+            min-height: 2.6em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-category-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-stock-status {
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin: 0.3rem 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .status-in-stock { color: var(--success); }
+        .status-low-stock { color: var(--warning); }
+        .status-out-stock { color: var(--danger); }
+
+        .product-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin: 0.4rem 0 0.8rem;
+        }
+
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .product-original-price {
+            font-size: 0.85rem;
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .btn-add-cart {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            border-radius: 50px;
+            background: var(--koba-green);
+            color: #fff;
+            border: none;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: var(--font);
+            margin-top: auto;
+        }
+
+        .btn-add-cart:hover {
+            background: var(--koba-green-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(30, 61, 43, 0.3);
+        }
+
+        .btn-add-cart:disabled {
+            background: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* CART PANEL */
+        .cart-panel {
+            background: var(--bg-card);
+            border: 2px solid var(--koba-gold);
+            border-radius: var(--radius-lg);
+            padding: 1.6rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+            display: none;
+        }
+
+        .cart-panel.visible { display: block; }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .cart-header h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .cart-items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            max-height: 280px;
+            overflow-y: auto;
+            margin-bottom: 1.2rem;
+            padding-right: 0.4rem;
+        }
+
+        .cart-item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-body);
+            padding: 0.6rem 1rem;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            gap: 0.8rem;
+        }
+
+        .cart-item-info {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cart-item-info img {
+            width: 32px;
+            height: 32px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .cart-item-name {
+            font-weight: 700;
+            font-size: 0.88rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .cart-qty-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .cart-qty-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .cart-qty-val {
+            font-weight: 700;
+            min-width: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-price {
+            font-weight: 800;
+            color: var(--accent);
+            font-size: 0.95rem;
+            min-width: 65px;
+            text-align: right;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.2rem;
+            transition: var(--transition);
+        }
+
+        .cart-item-remove:hover { transform: scale(1.2); }
+
+        .cart-summary-box {
+            background: var(--bg-body);
+            border-radius: var(--radius-sm);
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.25rem 0;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+
+        .summary-line.total {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            border-top: 2px solid var(--border-color);
+            padding-top: 0.6rem;
+            margin-top: 0.4rem;
+        }
+
+        .summary-line.total .val { color: var(--accent); }
+
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* PICKUP & DELIVERY INFO CARD */
+        .fulfillment-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border: 2px solid var(--koba-gold);
+            box-shadow: var(--shadow-sm);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .fulfillment-col {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+
+        .fulfillment-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 16px;
+            background: var(--badge-bg);
+            color: var(--koba-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .fulfillment-col h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 0.4rem;
+        }
+
+        .fulfillment-col p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ABOUT KOBA */
+        .about-section {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--koba-green);
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .about-highlight-box {
+            background: var(--bg-body);
+            border-radius: var(--radius-sm);
+            padding: 1.2rem;
+            border-left: 4px solid var(--koba-gold);
+        }
+
+        .about-highlight-box h4 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+            color: var(--text-primary);
+        }
+
+        .about-highlight-box p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* LOCATION & HOURS & MAP */
+        .location-section {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+            margin-top: 1.2rem;
+        }
+
+        .location-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .loc-info-card {
+            background: var(--bg-body);
+            padding: 1.2rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .loc-info-card i {
+            color: var(--accent);
+            font-size: 1.4rem;
+            margin-top: 0.2rem;
+        }
+
+        .loc-info-card h4 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            margin-bottom: 0.2rem;
+        }
+
+        .loc-info-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+
+        .map-wrapper {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            height: 320px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* CONTACT SECTION WITH MOBILE ACTION BUTTONS */
+        .contact-section {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            border: 2px solid var(--koba-gold);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+
+        .contact-mobile-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            max-width: 650px;
+            margin: 1.8rem auto 0;
+        }
+
+        .btn-action-mobile {
+            padding: 1rem 1.2rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-action-call {
+            background: var(--koba-green);
+            color: #fff;
+        }
+
+        .btn-action-call:hover {
+            background: var(--koba-green-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 61, 43, 0.3);
+        }
+
+        .btn-action-wa {
+            background: var(--whatsapp);
+            color: #fff;
+        }
+
+        .btn-action-wa:hover {
+            background: var(--whatsapp-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+        }
+
+        .btn-action-dir {
+            background: var(--koba-gold);
+            color: var(--koba-green-dark);
+        }
+
+        .btn-action-dir:hover {
+            background: var(--koba-gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(200, 162, 74, 0.4);
+        }
+
+        /* CHECKOUT MODAL */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            padding: 1rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal-content-checkout {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--koba-gold);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .modal-head h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-close-btn {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close-btn:hover { color: var(--danger); transform: rotate(90deg); }
+
+        .fulfillment-choice-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .fulfillment-radio-label {
+            border: 2px solid var(--border-color);
+            padding: 0.9rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .fulfillment-radio-label.selected {
+            border-color: var(--koba-gold);
+            background: var(--badge-bg);
+            color: var(--koba-green);
+        }
+
+        .checkout-form-group {
+            margin-bottom: 1rem;
+        }
+
+        .checkout-form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 0.3rem;
+        }
+
+        .checkout-form-group input, .checkout-form-group textarea, .checkout-form-group select {
+            width: 100%;
+            padding: 0.65rem 0.9rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: var(--bg-body);
+            color: var(--text-primary);
+            font-family: var(--font);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .checkout-form-group input:focus, .checkout-form-group textarea:focus, .checkout-form-group select:focus {
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+
+        .checkout-form-group textarea {
+            resize: vertical;
+            min-height: 65px;
+        }
+
+        .delivery-charge-callout {
+            background: var(--badge-bg);
+            border: 1px solid var(--koba-gold);
+            padding: 0.7rem 1rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--koba-green);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-submit-order {
+            width: 100%;
+            padding: 0.85rem;
+            background: linear-gradient(135deg, var(--whatsapp), var(--whatsapp-hover));
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            font-family: var(--font);
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            margin-top: 1rem;
+        }
+
+        .btn-submit-order:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+        }
+
+        /* FOOTER */
+        .site-footer {
+            margin-top: 4rem;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem 1.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+
+        .footer-brand {
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--koba-green);
+        }
+
+        .footer-logo .gold { color: var(--koba-gold); }
+
+        .footer-tagline {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 0.2rem;
+        }
+
+        .footer-social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .social-link-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link-btn:hover {
+            background: var(--koba-gold);
+            color: var(--koba-green-dark);
+            border-color: var(--koba-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(200, 162, 74, 0.3);
+        }
+
+        .footer-nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .footer-nav-links a:hover { color: var(--accent); }
+
+        .footer-divider {
+            width: 80px;
+            height: 3px;
+            background: var(--koba-gold);
+            margin: 1.5rem auto;
+            border-radius: 10px;
+        }
+
+        .footer-bottom {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+
+        /* FIXED BOTTOM BAR */
+        .fixed-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bottom-bar-bg);
+            border-top: 2px solid var(--selected-border);
+            padding: 0.8rem 1.5rem;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            z-index: 2000;
+            box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(20px);
+        }
+
+        .fixed-bottom-bar.visible { display: flex; }
+
+        .bar-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cart-icon-wrap {
+            position: relative;
+            font-size: 1.5rem;
+            color: var(--koba-gold);
+        }
+
+        .cart-badge-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--danger);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 800;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bar-total {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        .bar-right {
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .btn-bar {
+            padding: 0.55rem 1.2rem;
+            border-radius: 40px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: var(--font);
+        }
+
+        .btn-bar-clear {
+            background: var(--bg-body);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-bar-clear:hover { background: var(--danger); color: #fff; }
+
+        .btn-bar-checkout {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .btn-bar-checkout:hover {
+            background: var(--accent-hover);
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        /* PAGE VIEWS */
+        .page-view { display: none; }
+        .page-view.active { display: block; }
+
+        /* KOBA GROUP PAGE */
+        .koba-group-hero {
+            background: linear-gradient(135deg, var(--koba-green-dark), var(--koba-green));
+            padding: 3rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2.5rem;
+            text-align: center;
+            color: #fff;
+            border: 2px solid var(--koba-gold);
+        }
+
+        .koba-group-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .koba-group-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 2rem 1.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .koba-group-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--koba-gold);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .group-card-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            background: var(--badge-bg);
+            color: var(--koba-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.2rem;
+        }
+
+        .koba-group-card h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 0.4rem;
+        }
+
+        .koba-group-card .group-subtitle {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--koba-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .koba-group-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .fulfillment-card { grid-template-columns: 1fr; }
+            .about-section { grid-template-columns: 1fr; }
+            .location-grid { grid-template-columns: 1fr; }
+            .koba-group-grid { grid-template-columns: 1fr; }
+            .contact-mobile-actions { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 0.6rem 0.6rem 110px; }
+            .header {
+                padding: 0;
+                top: 0.5rem;
+                border-radius: var(--radius-md);
+            }
+            .header-top {
+                padding: 0.7rem 1rem;
+            }
+            .brand-logo-badge {
+                width: 38px;
+                height: 38px;
+                font-size: 1.25rem;
+            }
+            .brand-text h1 {
+                font-size: 1.2rem;
+            }
+            .brand-text .tagline {
+                font-size: 0.58rem;
+                letter-spacing: 1px;
+            }
+            .mobile-nav-toggle {
+                display: block;
+            }
+            .header-subnav {
+                display: none;
+                width: 100%;
+                padding: 0.8rem 1rem;
+            }
+            .header-subnav.open {
+                display: block;
+            }
+            .nav-menu {
+                flex-direction: column;
+                width: 100%;
+                gap: 0.35rem;
+            }
+            .nav-link {
+                width: 100%;
+                justify-content: flex-start;
+                padding: 0.55rem 0.9rem;
+            }
+            .hero { padding: 2rem 1.2rem; }
+            .hero h2 { font-size: 1.8rem; }
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+            .product-card { padding: 0.8rem; }
+            .product-image-wrap { width: 100px; height: 100px; }
+            .fixed-bottom-bar { padding: 0.6rem 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .product-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+            .hero-cta-group { flex-direction: column; }
+            .btn-cta { width: 100%; justify-content: center; }
+        }
+    
+    /* ADMIN INLINE MODAL & STYLES */
+    #adminView { display: none; margin-top: 1rem; }
+    #adminView.active { display: block; }
+    .admin-card-modal {
+        background: var(--bg-card);
+        border-radius: var(--radius-lg);
+        padding: 2.2rem 2rem;
+        max-width: 440px;
+        width: 100%;
+        box-shadow: var(--shadow-lg);
+        border: 2px solid var(--koba-gold);
+        text-align: center;
+    }
+    .admin-topbar-strip {
+        background: linear-gradient(135deg, var(--koba-green-dark), var(--koba-green));
+        padding: 0.9rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: var(--radius-md);
+        border: 2px solid var(--koba-gold);
+        color: #fff;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    .admin-tab-strip {
+        background: var(--bg-card);
+        border-bottom: 2px solid var(--border-color);
+        padding: 0 1rem;
+        display: flex;
+        gap: 0.4rem;
+        overflow-x: auto;
+        border-radius: var(--radius-sm);
+        margin-bottom: 1.5rem;
+    }
+    .admin-tab-btn {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-family: var(--font);
+        border-bottom: 3px solid transparent;
+        margin-bottom: -2px;
+        white-space: nowrap;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+    .admin-tab-btn:hover { color: var(--text-primary); }
+    .admin-tab-btn.active { color: var(--koba-green); border-bottom-color: var(--koba-gold); }
+    .admin-panel-box { display: none; }
+    .admin-panel-box.active { display: block; }
+    .admin-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    .admin-stat-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        padding: 1.2rem;
+        box-shadow: var(--shadow-sm);
+    }
+    .admin-stat-card .si { font-size: 1.6rem; margin-bottom: 0.4rem; }
+    .admin-stat-card .sv { font-size: 1.8rem; font-weight: 900; color: var(--accent); line-height: 1; }
+    .admin-stat-card .sl { font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 0.2rem; }
+    .admin-table-wrap {
+        background: var(--bg-card);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        margin-bottom: 1.5rem;
+    }
+    .admin-data-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.85rem;
+    }
+    .admin-data-table thead th {
+        background: var(--koba-green);
+        color: #fff;
+        padding: 0.8rem 1rem;
+        text-align: left;
+        font-weight: 700;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .admin-data-table tbody tr {
+        border-bottom: 1px solid var(--border-color);
+        transition: background 0.2s;
+    }
+    .admin-data-table tbody tr:hover { background: var(--bg-card-hover); }
+    .admin-data-table td {
+        padding: 0.7rem 1rem;
+        color: var(--text-primary);
+        vertical-align: middle;
+    }
+    .admin-form-box {
+        background: var(--bg-card);
+        border: 2px solid var(--koba-gold);
+        border-radius: var(--radius-md);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+    .admin-form-box h4 {
+        font-size: 1rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .admin-row-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+    .admin-form-group-item label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--text-secondary);
+        margin-bottom: 0.2rem;
+    }
+    .admin-form-group-item input, .admin-form-group-item select, .admin-form-group-item textarea {
+        width: 100%;
+        padding: 0.5rem 0.7rem;
+        border: 2px solid var(--border-color);
+        border-radius: var(--radius-sm);
+        font-size: 0.85rem;
+        background: var(--bg-body);
+        color: var(--text-primary);
+        font-family: var(--font);
+        outline: none;
+        transition: var(--transition);
+    }
+    .admin-form-group-item input:focus, .admin-form-group-item select:focus, .admin-form-group-item textarea:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .admin-checkbox-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 0.8rem;
+    }
+    .admin-checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        cursor: pointer;
+    }
+    .admin-checkbox-item input[type=checkbox] {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--accent);
+        cursor: pointer;
+    }
+    .admin-prod-card-item {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+    }
+    .admin-prod-card-item:hover {
+        border-color: var(--accent);
+        box-shadow: var(--shadow-md);
+    }
+    .admin-prod-card-item img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 1px solid var(--border-color);
+        flex-shrink: 0;
+    }
+    .apci-info { flex: 1; min-width: 0; }
+    .apci-name { font-weight: 700; font-size: 0.88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .apci-meta { font-size: 0.72rem; color: var(--text-muted); margin: 0.15rem 0; }
+    .apci-price { font-weight: 800; color: var(--accent); font-size: 0.95rem; }
+    .apci-actions { display: flex; flex-direction: column; gap: 0.3rem; flex-shrink: 0; }
+    .social-admin-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-bottom: 1rem;
+    }
+    .social-admin-item {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        padding: 0.9rem 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        box-shadow: var(--shadow-sm);
+    }
+    .social-admin-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+    .btn-admin-action {
+        padding: 0.35rem 0.8rem;
+        border-radius: 30px;
+        border: none;
+        font-weight: 700;
+        font-size: 0.78rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-family: var(--font);
+        transition: var(--transition);
+    }
+    .btn-admin-edit { background: var(--badge-bg); color: var(--accent); border: 1px solid var(--accent); }
+    .btn-admin-edit:hover { background: var(--accent); color: #fff; }
+    .btn-admin-del { background: rgba(239,68,68,0.1); color: var(--danger); border: 1px solid var(--danger); }
+    .btn-admin-del:hover { background: var(--danger); color: #fff; }
+    .admin-toast-notify {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        z-index: 99999;
+        padding: 0.7rem 1.4rem;
+        border-radius: 60px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.4s, transform 0.4s;
+        pointer-events: none;
+        font-family: var(--font);
+    }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- HEADER / NAVIGATION (2-TIER MODERN LAYOUT) -->
+        <header class="header">
+            <!-- Top Bar: Brand, Hamburger, Admin Portal, Language, Theme -->
+            <div class="header-top">
+                <a href="#home" class="header-brand" onclick="navigateTo('home')">
+                    <div class="brand-logo-badge">K</div>
+                    <div class="brand-text">
+                        <h1>KOBA</h1>
+                        <span class="tagline">CONVENIENCE • VARIETY • LIQUIDATION</span>
+                    </div>
+                </a>
+
+                <div class="header-controls">
+                    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <div class="lang-selector">
+                        <button class="lang-btn active" id="btnLangEn" onclick="switchLanguage('en')">EN</button>
+                        <button class="lang-btn" id="btnLangAm" onclick="switchLanguage('am')">አማ</button>
+                    </div>
+
+                    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle Dark/Light">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Second Tier: Sub-navigation Menu -->
+            <div class="header-subnav" id="headerSubnav">
+                <nav class="nav-menu" id="navMenu">
+                    <button class="nav-link active" onclick="navigateTo('home')"><i class="fas fa-house"></i> <span class="lang-en">Home</span><span class="lang-am">መነሻ</span></button>
+                    <button class="nav-link" onclick="scrollToSection('shopSection')"><i class="fas fa-store"></i> <span class="lang-en">Shop</span><span class="lang-am">መደብር</span></button>
+                    <button class="nav-link" onclick="scrollToSection('specialsSection')"><i class="fas fa-fire"></i> <span class="lang-en">Specials</span><span class="lang-am">ቅናሾች</span></button>
+                    <button class="nav-link" onclick="scrollToSection('liquidationSection')"><i class="fas fa-tags"></i> <span class="lang-en">Liquidation</span><span class="lang-am">ሊቅዊዴሽን</span></button>
+                    <button class="nav-link" onclick="scrollToSection('habeshaSection')"><i class="fas fa-seedling"></i> <span class="lang-en">Habesha Grocery</span><span class="lang-am">የሀበሻ ግሮሰሪ</span></button>
+                    <button class="nav-link" onclick="scrollToSection('aboutSection')"><i class="fas fa-info-circle"></i> <span class="lang-en">About</span><span class="lang-am">ስለ እኛ</span></button>
+                    <button class="nav-link" onclick="scrollToSection('contactSection')"><i class="fas fa-envelope"></i> <span class="lang-en">Contact</span><span class="lang-am">አግኙን</span></button>
+                    <button class="nav-link" onclick="navigateTo('koba-group')"><i class="fas fa-building"></i> <span class="lang-en">KOBA Group</span><span class="lang-am">ኮባ ግሩፕ</span></button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- MAIN HOMEPAGE VIEW -->
+        <div class="page-view active" id="homePageView">
+
+            <!-- 2. HERO: KOBA – Convenience • Variety • Liquidation -->
+            <section class="hero">
+                <div class="hero-badge-top">
+                    <i class="fas fa-store"></i>
+                    <span class="lang-en">Toronto's Neighborhood Store</span>
+                    <span class="lang-am">የቶሮንቶ የአካባቢዎ መደብር</span>
+                </div>
+                <h2>
+                    <span class="lang-en">KOBA – Convenience • <span class="highlight">Variety</span> • Liquidation</span>
+                    <span class="lang-am">ኮባ – ምቹ መደብር • <span class="highlight">ልዩ ልዩ</span> • ሊቅዊዴሽን</span>
+                </h2>
+                <p class="hero-sub lang-en">Habesha groceries, fresh injera, cold drinks, energy drinks, snacks, household essentials & daily liquidation bargains.</p>
+                <p class="hero-sub lang-am">የሀበሻ ግሮሰሪ፣ ትኩስ እንጀራ፣ መጠጦች፣ መክሰስ፣ የቤት ፍላጎቶች እና የየዕለቱ የሊቅዊዴሽን ቅናሾች።</p>
+                
+                <div class="hero-address">
+                    <i class="fas fa-location-dot"></i>
+                    <span>99 Howard Street, Unit 1, Toronto, ON M4X 1K1</span>
+                </div>
+
+                <!-- 3. CTAS: Shop Now / Today's Deals / Directions -->
+                <div class="hero-cta-group">
+                    <a href="#shopSection" class="btn-cta btn-cta-gold" onclick="scrollToSection('shopSection')">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="lang-en">Shop Now</span>
+                        <span class="lang-am">አሁን ይግዙ</span>
+                    </a>
+                    <a href="#specialsSection" class="btn-cta btn-cta-outline" onclick="scrollToSection('specialsSection')">
+                        <i class="fas fa-fire"></i>
+                        <span class="lang-en">Today's Deals</span>
+                        <span class="lang-am">የዛሬ ልዩ ቅናሾች</span>
+                    </a>
+                    <a href="https://www.google.com/maps?q=99+Howard+Street+Toronto+ON+M4X+1K1" target="_blank" class="btn-cta btn-cta-outline">
+                        <i class="fas fa-diamond-turn-right"></i>
+                        <span class="lang-en">Directions</span>
+                        <span class="lang-am">አቅጣጫዎች</span>
+                    </a>
+                </div>
+
+                <div class="hero-features">
+                    <span class="feature-pill"><i class="fas fa-check-circle"></i> <span class="lang-en">In-Store Pickup FREE</span><span class="lang-am">ነፃ ሱቅ ማንሳት</span></span>
+                    <span class="feature-pill"><i class="fas fa-truck-fast"></i> <span class="lang-en">Fast Local Delivery</span><span class="lang-am">ፈጣን ማድረሻ</span></span>
+                    <span class="feature-pill"><i class="fab fa-whatsapp"></i> <span class="lang-en">Easy WhatsApp Checkout</span><span class="lang-am">ቀላል የዋትሳፕ ትዕዛዝ</span></span>
+                </div>
+            </section>
+
+            <!-- 4. SEARCH -->
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search drinks, chips, injera, spices, electronics..." oninput="handleSearch(this.value)" />
+                </div>
+            </div>
+
+            <!-- 5. SHOP BY CATEGORY -->
+            <div class="category-filter-section" id="shopSection">
+                <div class="category-scroll-wrap" id="categoryPillList">
+                    <button class="cat-btn active" data-category="ALL" onclick="filterByCategory('ALL')">
+                        <i class="fas fa-border-all"></i> <span class="lang-en">All Products</span><span class="lang-am">ሁሉም ምርቶች</span>
+                    </button>
+                    <button class="cat-btn" data-category="Drinks" onclick="filterByCategory('Drinks')">🥤 <span class="lang-en">Drinks</span><span class="lang-am">መጠጦች</span></button>
+                    <button class="cat-btn" data-category="Energy Drinks" onclick="filterByCategory('Energy Drinks')">⚡ <span class="lang-en">Energy Drinks</span><span class="lang-am">የኃይል መጠጥ</span></button>
+                    <button class="cat-btn" data-category="Chips" onclick="filterByCategory('Chips')">🥔 <span class="lang-en">Chips</span><span class="lang-am">ቺፕስ</span></button>
+                    <button class="cat-btn" data-category="Candy" onclick="filterByCategory('Candy')">🍬 <span class="lang-en">Candy</span><span class="lang-am">ከረሜላ</span></button>
+                    <button class="cat-btn" data-category="Grocery" onclick="filterByCategory('Grocery')">🥫 <span class="lang-en">Grocery</span><span class="lang-am">ግሮሰሪ</span></button>
+                    <button class="cat-btn" data-category="Habesha" onclick="filterByCategory('Habesha')">🇪🇹 <span class="lang-en">Habesha</span><span class="lang-am">ሀበሻ</span></button>
+                    <button class="cat-btn" data-category="Household" onclick="filterByCategory('Household')">🧼 <span class="lang-en">Household</span><span class="lang-am">የቤት ዕቃዎች</span></button>
+                    <button class="cat-btn" data-category="Personal Care" onclick="filterByCategory('Personal Care')">🧴 <span class="lang-en">Personal Care</span><span class="lang-am">የግል ንፅህና</span></button>
+                    <button class="cat-btn" data-category="Variety" onclick="filterByCategory('Variety')">🎁 <span class="lang-en">Variety</span><span class="lang-am">ልዩ ልዩ</span></button>
+                    <button class="cat-btn" data-category="Electronics" onclick="filterByCategory('Electronics')">🔌 <span class="lang-en">Electronics</span><span class="lang-am">ኤሌክትሮኒክስ</span></button>
+                    <button class="cat-btn" data-category="Liquidation" onclick="filterByCategory('Liquidation')">🏷️ <span class="lang-en">Liquidation</span><span class="lang-am">ሊቅዊዴሽን</span></button>
+                </div>
+            </div>
+
+            <!-- CART PANEL (YOUR CART) -->
+            <div class="cart-panel" id="cartPanel">
+                <div class="cart-header">
+                    <h3><i class="fas fa-shopping-cart" style="color:var(--koba-gold);"></i> <span class="lang-en">Your Cart</span><span class="lang-am">የእርስዎ ቅርጫት</span></h3>
+                    <button class="btn-bar btn-bar-clear" onclick="clearCart()"><i class="fas fa-trash-can"></i> <span class="lang-en">Clear</span><span class="lang-am">አጽዳ</span></button>
+                </div>
+                <div class="cart-items-list" id="cartItemsList"></div>
+                <div class="cart-summary-box">
+                    <div class="summary-line">
+                        <span class="lang-en">Subtotal:</span><span class="lang-am">ድምር:</span>
+                        <span class="val" id="cartSubtotal">$0.00</span>
+                    </div>
+                    <div class="summary-line">
+                        <span class="lang-en">Delivery Option:</span><span class="lang-am">የማድረሻ አማራጭ:</span>
+                        <span class="val" id="cartFulfillmentLabel">Pickup (FREE)</span>
+                    </div>
+                    <div class="summary-line">
+                        <span class="lang-en">Delivery Fee:</span><span class="lang-am">የማድረሻ ክፍያ:</span>
+                        <span class="val" id="cartDeliveryFee">$0.00</span>
+                    </div>
+                    <div class="summary-line total">
+                        <span class="lang-en">Estimated Total:</span><span class="lang-am">ጠቅላላ ድምር:</span>
+                        <span class="val" id="cartTotal">$0.00</span>
+                    </div>
+                </div>
+                <div class="cart-actions">
+                    <button class="btn-bar btn-bar-clear" onclick="clearCart()"><i class="fas fa-times"></i> <span class="lang-en">Reset</span><span class="lang-am">እንደገና ጀምር</span></button>
+                    <button class="btn-cta btn-cta-gold" onclick="openCheckoutModal()">
+                        <i class="fab fa-whatsapp"></i> <span class="lang-en">Proceed to Checkout</span><span class="lang-am">ወደ ትዕዛዝ ቀጥል</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6. TODAY'S SPECIALS SECTION -->
+            <section id="specialsSection">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fas fa-fire"></i>
+                        <span class="lang-en">Today's Specials</span>
+                        <span class="lang-am">የዛሬ ልዩ ቅናሾች</span>
+                    </div>
+                    <span class="section-tag lang-en">Limited Time Pricing</span>
+                    <span class="section-tag lang-am">ለተወሰነ ጊዜ ብቻ</span>
+                </div>
+                <div class="product-grid" id="specialsGrid"></div>
+            </section>
+
+            <!-- 7. LIQUIDATION DEALS SECTION -->
+            <section id="liquidationSection">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fas fa-tags"></i>
+                        <span class="lang-en">Liquidation Deals</span>
+                        <span class="lang-am">የሊቅዊዴሽን ዕድሎች</span>
+                    </div>
+                    <span class="section-tag lang-en">Huge Discounts • While Supplies Last</span>
+                    <span class="section-tag lang-am">እስኪያልቅ ድረስ ልዩ ቅናሽ</span>
+                </div>
+                <div class="product-grid" id="liquidationGrid"></div>
+            </section>
+
+            <!-- 8. HABESHA GROCERY SECTION -->
+            <section id="habeshaSection">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fas fa-seedling"></i>
+                        <span class="lang-en">Habesha Grocery</span>
+                        <span class="lang-am">የሀበሻ ግሮሰሪ</span>
+                    </div>
+                    <span class="section-tag lang-en">Fresh Injera • Spices • Coffee • Teff</span>
+                    <span class="section-tag lang-am">ትኩስ እንጀራ • ቅመማ ቅመም • ቡና • ጤፍ</span>
+                </div>
+                <div class="product-grid" id="habeshaGrid"></div>
+            </section>
+
+            <!-- 9. POPULAR PRODUCTS (FULL CATALOG) -->
+            <section id="popularSection">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fas fa-star"></i>
+                        <span class="lang-en">All Products & Variety</span>
+                        <span class="lang-am">ሁሉም ምርቶች እና ልዩ ልዩ</span>
+                    </div>
+                    <span class="section-tag lang-en" id="catalogCountTag">Showing all items</span>
+                    <span class="section-tag lang-am" id="catalogCountTagAm">ሁሉንም በማሳየት ላይ</span>
+                </div>
+                <div class="product-grid" id="mainProductGrid"></div>
+            </section>
+
+            <!-- 10. PICKUP & DELIVERY INFO CARD -->
+            <section class="fulfillment-card">
+                <div class="fulfillment-col">
+                    <div class="fulfillment-icon"><i class="fas fa-store"></i></div>
+                    <div>
+                        <h3>
+                            <span class="lang-en">In-Store Pickup – FREE</span>
+                            <span class="lang-am">ከሱቅ መውሰድ – ነፃ</span>
+                        </h3>
+                        <p class="lang-en">Ready in 15 minutes. Pick up directly at 99 Howard St, Unit 1, Toronto. No minimum order, zero fees.</p>
+                        <p class="lang-am">በ15 ደቂቃ ውስጥ ዝግጁ ይሆናል። ከ99 ሃዋርድ ስትሪት ቁጥር 1፣ ቶሮንቶ በቀጥታ ይውሰዱ። ምንም ተጨማሪ ክፍያ የለም።</p>
+                    </div>
+                </div>
+                <div class="fulfillment-col">
+                    <div class="fulfillment-icon"><i class="fas fa-truck-fast"></i></div>
+                    <div>
+                        <h3>
+                            <span class="lang-en">Delivery to Your Door</span>
+                            <span class="lang-am">እስከ ቤትዎ ማድረስ</span>
+                        </h3>
+                        <p class="lang-en">Orders $50+ qualify for discounted $5 delivery. Orders under $50 delivered from $10. Delivery charge shown clearly before you submit.</p>
+                        <p class="lang-am">ከ$50 በላይ ለሆኑ ትዕዛዞች የ$5 ማድረሻ ክፍያ። ከ$50 በታች ከ$10 ጀምሮ። ከመላክዎ በፊት የማድረሻ ክፍያው በግልጽ ይታያል።</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 11. ABOUT KOBA -->
+            <section class="about-section" id="aboutSection">
+                <div class="about-text">
+                    <h2>
+                        <span class="lang-en">About KOBA Convenience & Liquidation</span>
+                        <span class="lang-am">ስለ ኮባ ምቹ መደብር እና ሊቅዊዴሽን</span>
+                    </h2>
+                    <p class="lang-en">KOBA is your trusted Toronto destination combining neighborhood convenience, authentic Habesha groceries, and incredible liquidation deals. From daily drinks, snacks, and fresh injera to surplus household bargains, we bring value, quality, and community together under one roof.</p>
+                    <p class="lang-am">ኮባ የአካባቢዎን ምቹ መደብር ፍላጎት፣ ትክክለኛ የሀበሻ ግሮሰሪ እና አስገራሚ የሊቅዊዴሽን ቅናሾችን በአንድ ላይ የሚያቀርብ የታመነ የቶሮንቶ የንግድ ስፍራ ነው።</p>
+                    <div class="about-highlights">
+                        <div class="about-highlight-box">
+                            <h4><i class="fas fa-check"></i> <span class="lang-en">Authentic Quality</span><span class="lang-am">ትክክለኛ ጥራት</span></h4>
+                            <p class="lang-en">Direct imports of Ethiopian coffee, teff, spices and freshly made daily injera.</p>
+                            <p class="lang-am">ቀጥታ የገባ የኢትዮጵያ ቡና፣ ጤፍ፣ ቅመሞች እና ትኩስ እንጀራ።</p>
+                        </div>
+                        <div class="about-highlight-box">
+                            <h4><i class="fas fa-tags"></i> <span class="lang-en">Real Value</span><span class="lang-am">ተመጣጣኝ ዋጋ</span></h4>
+                            <p class="lang-en">Liquidation buys passed directly to our customers at unbeatable low prices.</p>
+                            <p class="lang-am">ተመጣጣኝ ዋጋ እና ልዩ የሊቅዊዴሽን ቅናሾች ለደንበኞቻችን።</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&auto=format&fit=crop&q=80" alt="KOBA Storefront" style="width:100%; border-radius:var(--radius-md); box-shadow:var(--shadow-md); border:2px solid var(--border-color); object-fit:cover; height:320px;" />
+                </div>
+            </section>
+
+            <!-- 12. LOCATION / HOURS / MAP -->
+            <section class="location-section">
+                <div class="section-title">
+                    <i class="fas fa-location-dot"></i>
+                    <span class="lang-en">Store Location & Hours</span>
+                    <span class="lang-am">የመደብሩ አድራሻ እና የስራ ሰዓት</span>
+                </div>
+                <div class="location-grid">
+                    <div class="location-info">
+                        <div class="loc-info-card">
+                            <i class="fas fa-map-pin"></i>
+                            <div>
+                                <h4><span class="lang-en">Address</span><span class="lang-am">አድራሻ</span></h4>
+                                <p>99 Howard Street, Unit 1<br>Toronto, ON M4X 1K1, Canada</p>
+                            </div>
+                        </div>
+                        <div class="loc-info-card">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4><span class="lang-en">Opening Hours</span><span class="lang-am">የስራ ሰዓታት</span></h4>
+                                <p><span class="lang-en">Monday – Sunday: 8:00 AM – 10:00 PM</span><span class="lang-am">ሰኞ – እሑድ: 8:00 ጠዋት – 10:00 ማታ</span></p>
+                            </div>
+                        </div>
+                        <div class="loc-info-card">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4><span class="lang-en">Phone & WhatsApp</span><span class="lang-am">ስልክ እና ዋትሳፕ</span></h4>
+                                <p>+1 (437) 879-3601</p>
+                            </div>
+                        </div>
+                        <div class="loc-info-card">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4><span class="lang-en">Email</span><span class="lang-am">ኢሜይል</span></h4>
+                                <p>info@kobastore.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-wrapper">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2885.834407886477!2d-79.37370132338874!3d43.671084751848525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4cb50dbe7351d%3A0xc1655dfad0a42f07!2s99%20Howard%20St%20%231%2C%20Toronto%2C%20ON%20M4X%201K1!5e0!3m2!1sen!2sca!4v1700000000000" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 13. CONTACT (WITH CALL | WHATSAPP | DIRECTIONS BUTTONS) -->
+            <section class="contact-section" id="contactSection">
+                <div class="section-title" style="justify-content:center;">
+                    <i class="fas fa-headset"></i>
+                    <span class="lang-en">Connect With KOBA</span>
+                    <span class="lang-am">ከኮባ ጋር ይገናኙ</span>
+                </div>
+                <p class="lang-en" style="color:var(--text-secondary); max-width:550px; margin:0.6rem auto 0;">Have questions about stock, orders or wholesale? Reach out directly to our store team.</p>
+                <p class="lang-am" style="color:var(--text-secondary); max-width:550px; margin:0.6rem auto 0;">ስለ ምርቶች ወይም ትዕዛዝ ጥያቄ አለዎት? በቀጥታ የመደብራችንን ቡድን ያነጋግሩ።</p>
+
+                <div class="contact-mobile-actions">
+                    <a href="tel:+14378793601" class="btn-action-mobile btn-action-call">
+                        <i class="fas fa-phone-volume" style="font-size:1.6rem;"></i>
+                        <span>CALL</span>
+                    </a>
+                    <a href="https://wa.me/14378793601?text=Hi%20KOBA,%20I%20have%20an%20inquiry" target="_blank" class="btn-action-mobile btn-action-wa">
+                        <i class="fab fa-whatsapp" style="font-size:1.6rem;"></i>
+                        <span>WHATSAPP</span>
+                    </a>
+                    <a href="https://www.google.com/maps?q=99+Howard+Street+Toronto+ON+M4X+1K1" target="_blank" class="btn-action-mobile btn-action-dir">
+                        <i class="fas fa-diamond-turn-right" style="font-size:1.6rem;"></i>
+                        <span>DIRECTIONS</span>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- KOBA GROUP PAGE VIEW -->
+        <div class="page-view" id="kobaGroupView">
+            <section class="koba-group-hero">
+                <div class="brand-logo-badge" style="margin:0 auto 1rem; width:60px; height:60px; font-size:2rem;">K</div>
+                <h2>
+                    <span class="lang-en">KOBA Business Group</span>
+                    <span class="lang-am">የኮባ ቢዝነስ ግሩፕ</span>
+                </h2>
+                <p style="opacity:0.85; max-width:650px; margin:0.8rem auto 0;" class="lang-en">9811575 Canada Ltd. — Our family of businesses proudly serving community through retail, tourism, events and agriculture.</p>
+                <p style="opacity:0.85; max-width:650px; margin:0.8rem auto 0;" class="lang-am">9811575 ካናዳ ሊሚትድ — ማህበረሰባችንን በችርቻሮ፣ በቱሪዝም፣ በዝግጅቶች እና በግብርና የሚያገለግል የንግድ ቤተሰብ።</p>
+                <div style="margin-top:1.5rem;">
+                    <button class="btn-cta btn-cta-gold" onclick="navigateTo('home')">
+                        <i class="fas fa-arrow-left"></i> <span class="lang-en">Return to Storefront</span><span class="lang-am">ወደ መደብሩ ተመለስ</span>
+                    </button>
+                </div>
+            </section>
+
+            <div class="koba-group-grid">
+                <div class="koba-group-card">
+                    <div class="group-card-icon"><i class="fas fa-plane-departure"></i></div>
+                    <h3><span class="lang-en">Koba Vacations</span><span class="lang-am">ኮባ ቫኬሽን</span></h3>
+                    <div class="group-subtitle"><span class="lang-en">Travel & Tourism</span><span class="lang-am">ጉዞ እና ቱሪዝም</span></div>
+                    <p class="lang-en">Creating unforgettable vacation packages, flight bookings, and cultural tourism experiences connecting Canada, Ethiopia and global destinations.</p>
+                    <p class="lang-am">የበረራ ትኬቶችን፣ የጉዞ እና የቱሪዝም አገልግሎቶችን በማቅረብ የማይረሱ የበዓል ተሞክሮዎችን ያዘጋጃል።</p>
+                </div>
+
+                <div class="koba-group-card">
+                    <div class="group-card-icon"><i class="fas fa-champagne-glasses"></i></div>
+                    <h3><span class="lang-en">Koba Event Planning</span><span class="lang-am">ኮባ ዝግጅት እቅድ</span></h3>
+                    <div class="group-subtitle"><span class="lang-en">Celebrations & Corporate</span><span class="lang-am">ክብረ በዓላት እና ዝግጅቶች</span></div>
+                    <p class="lang-en">Full-service event coordination for weddings, community festivals, corporate gatherings and family celebrations with customized care.</p>
+                    <p class="lang-am">ለሰርግ፣ ለበዓላት እና ለኮርፖሬት ዝግጅቶች የተሟላ የዝግጅት አደረጃጀት እና እቅድ አገልግሎት።</p>
+                </div>
+
+                <div class="koba-group-card">
+                    <div class="group-card-icon"><i class="fas fa-wheat-awn"></i></div>
+                    <h3><span class="lang-en">Koba Farm</span><span class="lang-am">ኮባ እርሻ</span></h3>
+                    <div class="group-subtitle"><span class="lang-en">Agriculture & Fresh Food</span><span class="lang-am">ግብርና እና ትኩስ ምግብ</span></div>
+                    <p class="lang-en">Dedicated to sustainable farming practices and supplying wholesome agricultural produce, grains and specialty Ethiopian staples.</p>
+                    <p class="lang-am">በዘላቂ የግብርና ዘዴዎች የተመረቱ ጥራት ያላቸው የግብርና ምርቶችን እና እህሎችን ያቀርባል።</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 14. FOOTER -->
+        
+        
+
+        <footer class="site-footer">
+            <div class="footer-brand">
+                <div class="footer-logo">KOBA <span class="gold">CONVENIENCE</span></div>
+                <div class="footer-tagline">CONVENIENCE • VARIETY • LIQUIDATION</div>
+            </div>
+
+            <!-- DYNAMIC SOCIAL MEDIA LINKS FROM FIRESTORE -->
+            <div class="footer-social-links" id="footerSocialLinks">
+                <!-- Fallback defaults until Firestore loads -->
+                <a href="https://t.me/kobastore" target="_blank" class="social-link-btn" title="Telegram"><i class="fab fa-telegram"></i></a>
+                <a href="https://wa.me/14378793601" target="_blank" class="social-link-btn" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://tiktok.com/@koba2995" target="_blank" class="social-link-btn" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://instagram.com/kobastore" target="_blank" class="social-link-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com/share/1bLNfxHKbV/" target="_blank" class="social-link-btn" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="mailto:info@kobastore.com" class="social-link-btn" title="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+
+            <div class="footer-nav-links">
+                <a href="#home" onclick="navigateTo('home')"><span class="lang-en">Home</span><span class="lang-am">መነሻ</span></a>
+                <a href="#shopSection" onclick="scrollToSection('shopSection')"><span class="lang-en">Shop</span><span class="lang-am">መደብር</span></a>
+                <a href="#specialsSection" onclick="scrollToSection('specialsSection')"><span class="lang-en">Specials</span><span class="lang-am">ቅናሾች</span></a>
+                <a href="#liquidationSection" onclick="scrollToSection('liquidationSection')"><span class="lang-en">Liquidation</span><span class="lang-am">ሊቅዊዴሽን</span></a>
+                <a href="#habeshaSection" onclick="scrollToSection('habeshaSection')"><span class="lang-en">Habesha Grocery</span><span class="lang-am">የሀበሻ ግሮሰሪ</span></a>
+                <a href="#aboutSection" onclick="scrollToSection('aboutSection')"><span class="lang-en">About</span><span class="lang-am">ስለ እኛ</span></a>
+                <a href="#contactSection" onclick="scrollToSection('contactSection')"><span class="lang-en">Contact</span><span class="lang-am">አግኙን</span></a>
+                <a href="#kobaGroup" onclick="navigateTo('koba-group')"><span class="lang-en">KOBA Group</span><span class="lang-am">ኮባ ግሩፕ</span></a>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom">
+                &copy; 2026 KOBA Convenience & Liquidation (9811575 Canada Ltd.) • Toronto, ON. All rights reserved. 🇪🇹🇨🇦
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- FIXED BOTTOM BAR -->
+    <div class="fixed-bottom-bar" id="fixedBottomBar">
+        <div class="bar-left">
+            <div class="cart-icon-wrap" onclick="toggleCartPanel()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge-count" id="bottomCartCount">0</span>
+            </div>
+            <div>
+                <span style="font-size:0.75rem; color:var(--text-muted); display:block;"><span class="lang-en">Total</span><span class="lang-am">ጠቅላላ</span></span>
+                <span class="bar-total" id="bottomCartTotal">$0.00</span>
+            </div>
+        </div>
+        <div class="bar-right">
+            <button class="btn-bar btn-bar-clear" onclick="clearCart()"><i class="fas fa-times"></i> <span class="lang-en">Clear</span><span class="lang-am">አጽዳ</span></button>
+            <button class="btn-bar btn-bar-checkout" onclick="openCheckoutModal()">
+                <i class="fab fa-whatsapp"></i> <span class="lang-en">Checkout</span><span class="lang-am">ትዕዛዝ</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL (WITH BAG SELECTION & CLEAR DELIVERY COSTS) -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-content-checkout">
+            <div class="modal-head">
+                <h3><i class="fab fa-whatsapp" style="color:var(--whatsapp);"></i> <span class="lang-en">Checkout via WhatsApp</span><span class="lang-am">በዋትሳፕ እዘዙ</span></h3>
+                <button class="modal-close-btn" onclick="closeCheckoutModal()">&times;</button>
+            </div>
+
+            <form id="orderCheckoutForm" onsubmit="handleOrderSubmit(event)">
+                <!-- PICKUP VS DELIVERY -->
+                <div class="fulfillment-choice-group">
+                    <label class="fulfillment-radio-label selected" id="optPickupLabel">
+                        <input type="radio" name="orderType" value="pickup" checked onchange="toggleFulfillmentType('pickup')" style="accent-color:var(--koba-gold);" />
+                        <div>
+                            <span>🏪 <span class="lang-en">Pickup</span><span class="lang-am">ከሱቅ መውሰድ</span></span>
+                            <span style="font-size:0.75rem; display:block; color:var(--success); font-weight:800;">FREE</span>
+                        </div>
+                    </label>
+                    <label class="fulfillment-radio-label" id="optDeliveryLabel">
+                        <input type="radio" name="orderType" value="delivery" onchange="toggleFulfillmentType('delivery')" style="accent-color:var(--koba-gold);" />
+                        <div>
+                            <span>🚚 <span class="lang-en">Delivery</span><span class="lang-am">ማድረስ</span></span>
+                            <span style="font-size:0.75rem; display:block; color:var(--accent); font-weight:800;" id="deliveryRateTag">$10–$15</span>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- BAG SELECTION AT CHECKOUT -->
+                <div class="checkout-form-group">
+                    <label><i class="fas fa-shopping-bag"></i> <span class="lang-en">Shopping Bag Selection</span><span class="lang-am">የከረጢት ምርጫ</span></label>
+                    <select id="checkoutBagSelect" onchange="updateCheckoutTotals()">
+                        <option value="none">No Bag ($0.00)</option>
+                        <option value="small">Small Bag ($0.50)</option>
+                        <option value="medium" selected>Medium Bag ($1.00)</option>
+                        <option value="large">Large Bag ($2.00)</option>
+                    </select>
+                </div>
+
+                <div class="checkout-form-group">
+                    <label><span class="lang-en">Your Full Name *</span><span class="lang-am">ሙሉ ስም *</span></label>
+                    <input type="text" id="custName" placeholder="e.g. Samuel Bekele" required />
+                </div>
+
+                <div class="checkout-form-group">
+                    <label><span class="lang-en">Phone Number *</span><span class="lang-am">ስልክ ቁጥር *</span></label>
+                    <input type="tel" id="custPhone" placeholder="e.g. +1 437 879 3601" required />
+                </div>
+
+                <!-- ADDRESS ONLY SHOWN IF DELIVERY SELECTED -->
+                <div class="checkout-form-group" id="deliveryAddressGroup" style="display:none;">
+                    <label><span class="lang-en">Delivery Address & Unit Number *</span><span class="lang-am">የማድረሻ አድራሻ እና የቤት ቁጥር *</span></label>
+                    <input type="text" id="custAddress" placeholder="e.g. 100 Howard St, Apt 405, Toronto" />
+                </div>
+
+                <div class="checkout-form-group">
+                    <label><span class="lang-en">Special Instructions / Notes (Optional)</span><span class="lang-am">ተጨማሪ ማስታወሻ (አማራጭ)</span></label>
+                    <textarea id="custNotes" placeholder="Any delivery notes, preferred time, or item preferences..."></textarea>
+                </div>
+
+                <!-- DELIVERY FEE CALLOUT -->
+                <div class="delivery-charge-callout">
+                    <span><span class="lang-en">Delivery / Pickup Charge:</span><span class="lang-am">የማድረሻ / የመውሰጃ ክፍያ:</span></span>
+                    <span id="modalDeliveryChargeText" style="font-size:1.1rem;">FREE</span>
+                </div>
+
+                <!-- ORDER SUMMARY PREVIEW -->
+                <div style="background:var(--bg-body); padding:0.8rem 1rem; border-radius:var(--radius-sm); font-size:0.88rem; margin-bottom:1rem; border:1px solid var(--border-color);">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.2rem;">
+                        <span><span class="lang-en">Items Subtotal:</span><span class="lang-am">የዕቃዎች ድምር:</span></span>
+                        <strong id="modalSubtotalText">$0.00</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.2rem;">
+                        <span><span class="lang-en">Bag Fee:</span><span class="lang-am">የከረጢት ክፍያ:</span></span>
+                        <strong id="modalBagFeeText">$1.00</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; font-size:1.1rem; font-weight:900; color:var(--accent); border-top:1px solid var(--border-color); padding-top:0.4rem; margin-top:0.3rem;">
+                        <span><span class="lang-en">Grand Total:</span><span class="lang-am">ጠቅላላ ድምር:</span></span>
+                        <span id="modalGrandTotalText">$0.00</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit-order">
+                    <i class="fab fa-whatsapp"></i> <span class="lang-en">Submit WhatsApp Order</span><span class="lang-am">ትዕዛዙን በዋትሳፕ ላክ</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FIREBASE COMPAT SDKS -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <!-- STORE FRONTEND APPLICATION SCRIPT -->
+    <script>
+        (function() {
+            'use strict';
+
+            var FIREBASE_CONFIG = {
+                apiKey:            "AIzaSyAgYEuFCikd1Nr1SVCoSwZ8qZ3aS5zHYJw",
+                authDomain:        "koba-87649.firebaseapp.com",
+                projectId:         "koba-87649",
+                storageBucket:     "koba-87649.firebasestorage.app",
+                messagingSenderId: "1033707995087",
+                appId:             "1:1033707995087:web:32b3b2da1393a5a7b21cba"
+            };
+
+            var db = null;
+            try {
+                var app = firebase.initializeApp(FIREBASE_CONFIG);
+                db = firebase.firestore();
+            } catch (e) {
+                console.warn('Firebase init:', e);
+            }
+
+            // DEFAULT STORE CATALOG
+            var DEFAULT_PRODUCTS = [
+                { id: "1",  nameEn: "Teff Grain & Flour",       nameAm: "ጤፍ እህል እና ዱቄት", category: "Habesha",      price: 8.99,  salePrice: null, isHabesha: true,  isSpecial: false, isLiquidation: false, isFeatured: true,  stock: 25, image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300&auto=format&fit=crop&q=80" },
+                { id: "2",  nameEn: "Fresh Injera (5 Pack)",    nameAm: "ትኩስ እንጀራ (ባለ 5)",   category: "Habesha",      price: 5.99,  salePrice: null, isHabesha: true,  isSpecial: true,  isLiquidation: false, isFeatured: true,  stock: 40, image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&auto=format&fit=crop&q=80" },
+                { id: "3",  nameEn: "Ethiopian Roasted Coffee", nameAm: "የተጠበሰ የኢትዮጵያ ቡና", category: "Habesha",      price: 14.99, salePrice: 12.99,isHabesha: true,  isSpecial: true,  isLiquidation: false, isFeatured: true,  stock: 18, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=300&auto=format&fit=crop&q=80" },
+                { id: "4",  nameEn: "Pure Berbere Spice",       nameAm: "ንፁህ የሀበሻ በርበሬ",    category: "Habesha",      price: 7.99,  salePrice: null, isHabesha: true,  isSpecial: false, isLiquidation: false, isFeatured: false, stock: 30, image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=300&auto=format&fit=crop&q=80" },
+                { id: "5",  nameEn: "Red Bull Energy 250ml",    nameAm: "ሬድቡል የኃይል መጠጥ",   category: "Energy Drinks", price: 3.49,  salePrice: null, isHabesha: false, isSpecial: false, isLiquidation: false, isFeatured: true,  stock: 50, image: "https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=300&auto=format&fit=crop&q=80" },
+                { id: "6",  nameEn: "Monster Energy 473ml",     nameAm: "ሞንስተር የኃይል መጠጥ",  category: "Energy Drinks", price: 3.99,  salePrice: 2.99, isHabesha: false, isSpecial: true,  isLiquidation: false, isFeatured: false, stock: 35, image: "https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=300&auto=format&fit=crop&q=80" },
+                { id: "7",  nameEn: "Coca-Cola Classic 500ml",  nameAm: "ኮካ ኮላ 500 ሚ.ሊ",     category: "Drinks",        price: 2.49,  salePrice: null, isHabesha: false, isSpecial: false, isLiquidation: false, isFeatured: true,  stock: 60, image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=300&auto=format&fit=crop&q=80" },
+                { id: "8",  nameEn: "Lay's Classic Chips 165g", nameAm: "ሌይስ ክላሲክ ቺፕስ",     category: "Chips",         price: 3.29,  salePrice: null, isHabesha: false, isSpecial: false, isLiquidation: false, isFeatured: false, stock: 22, image: "https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=300&auto=format&fit=crop&q=80" },
+                { id: "9",  nameEn: "Doritos Nacho Cheese",     nameAm: "ዶሪቶስ ናቾ ቺዝ",       category: "Chips",         price: 3.49,  salePrice: 2.49, isHabesha: false, isSpecial: false, isLiquidation: true,  isFeatured: false, stock: 15, image: "https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=300&auto=format&fit=crop&q=80" },
+                { id: "10", nameEn: "Surplus Wireless Earbuds", nameAm: "ዋየርለስ የጆሮ ማዳመጫ",   category: "Electronics",   price: 19.99, salePrice: 9.99, isHabesha: false, isSpecial: false, isLiquidation: true,  isFeatured: false, stock: 10, image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=300&auto=format&fit=crop&q=80" },
+                { id: "11", nameEn: "Liquid Laundry Detergent", nameAm: "የልብስ ማጠቢያ ሳሙና",    category: "Household",     price: 8.99,  salePrice: 5.99, isHabesha: false, isSpecial: false, isLiquidation: true,  isFeatured: false, stock: 8,  image: "https://images.unsplash.com/photo-1585842378054-ee2e52f94ba2?w=300&auto=format&fit=crop&q=80" },
+                { id: "12", nameEn: "Mitmita Hot Chili 200g",   nameAm: "የበሰለ ሚጥሚጣ 200ግ",     category: "Habesha",      price: 6.99,  salePrice: null, isHabesha: true,  isSpecial: false, isLiquidation: false, isFeatured: false, stock: 25, image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=300&auto=format&fit=crop&q=80" }
+            ];
+
+            // STATE
+            var products = DEFAULT_PRODUCTS.slice();
+            var cart = [];
+            var currentCategory = 'ALL';
+            var searchQuery = '';
+            var fulfillmentType = 'pickup'; // 'pickup' or 'delivery'
+
+            // INITIALIZE
+            function init() {
+                loadCartState();
+                loadLanguageState();
+                loadThemeState();
+                initFirestoreListeners();
+                renderAllProductSections();
+                updateCartUI();
+            }
+
+            // FIRESTORE LISTENERS (PRODUCTS & SOCIAL MEDIA)
+            function initFirestoreListeners() {
+                if (!db) return;
+
+                // Sync Products
+                db.collection('koba_catalog').doc('products').onSnapshot(function(doc) {
+                    if (doc.exists && doc.data() && Array.isArray(doc.data().list) && doc.data().list.length > 0) {
+                        products = doc.data().list;
+                        renderAllProductSections();
+                        updateCartUI();
+                    }
+                }, function(err) {
+                    console.warn('Firestore catalog stream:', err);
+                });
+
+                // Sync Social Links
+                db.collection('koba_social').doc('links').onSnapshot(function(doc) {
+                    if (doc.exists && doc.data() && Array.isArray(doc.data().list) && doc.data().list.length > 0) {
+                        renderFooterSocial(doc.data().list);
+                    }
+                }, function(err) {
+                    console.warn('Firestore social stream:', err);
+                });
+            }
+
+            function renderFooterSocial(list) {
+                var container = document.getElementById('footerSocialLinks');
+                if (!container) return;
+                var ICONS = {
+                    telegram:  'fab fa-telegram',
+                    whatsapp:  'fab fa-whatsapp',
+                    instagram: 'fab fa-instagram',
+                    tiktok:    'fab fa-tiktok',
+                    facebook:  'fab fa-facebook',
+                    linkedin:  'fab fa-linkedin',
+                    email:     'fas fa-envelope',
+                    other:     'fas fa-link'
+                };
+                container.innerHTML = list.map(function(item) {
+                    var icon = ICONS[item.platform] || ICONS.other;
+                    var url = item.url || '#';
+                    if (item.platform === 'email' && !url.startsWith('mailto:')) url = 'mailto:' + url;
+                    if (item.platform === 'whatsapp' && !url.startsWith('http')) url = 'https://wa.me/' + url.replace(/[^0-9]/g, '');
+                    return '<a href="' + url + '" target="_blank" class="social-link-btn" title="' + (item.label || item.platform) + '"><i class="' + icon + '"></i></a>';
+                }).join('');
+            }
+
+            // RENDERING CARDS
+            function createProductCardHTML(p) {
+                var isOutOfStock = p.isOutOfStock || (p.stock !== undefined && p.stock <= 0);
+                var isLowStock = !isOutOfStock && p.stock !== undefined && p.stock <= (p.lowStock || 5);
+
+                var badgeHTML = '';
+                if (p.isSpecial) badgeHTML = '<span class="product-badge-flag badge-special"><i class="fas fa-fire"></i> Special</span>';
+                else if (p.isLiquidation) badgeHTML = '<span class="product-badge-flag badge-liquidation"><i class="fas fa-tag"></i> Liquidation</span>';
+                else if (p.isHabesha) badgeHTML = '<span class="product-badge-flag badge-habesha">🇪🇹 Habesha</span>';
+                else if (p.isFeatured) badgeHTML = '<span class="product-badge-flag badge-popular">⭐ Popular</span>';
+
+                var stockHTML = '<span class="product-stock-status status-in-stock"><i class="fas fa-check-circle"></i> <span class="lang-en">In Stock</span><span class="lang-am">አለ</span></span>';
+                if (isOutOfStock) {
+                    stockHTML = '<span class="product-stock-status status-out-stock"><i class="fas fa-times-circle"></i> <span class="lang-en">Out of Stock</span><span class="lang-am">አልቋል</span></span>';
+                } else if (isLowStock) {
+                    stockHTML = '<span class="product-stock-status status-low-stock"><i class="fas fa-triangle-exclamation"></i> <span class="lang-en">Low Stock (' + p.stock + ')</span><span class="lang-am">ጥቂት ቀርቷል (' + p.stock + ')</span></span>';
+                }
+
+                var priceHTML = '<div class="product-price">$' + parseFloat(p.price || 0).toFixed(2) + '</div>';
+                if (p.salePrice) {
+                    priceHTML = '<div class="product-price">$' + parseFloat(p.salePrice).toFixed(2) + '</div>' +
+                                '<div class="product-original-price">$' + parseFloat(p.price).toFixed(2) + '</div>';
+                }
+
+                var sizeText = p.size ? ' • ' + p.size : '';
+
+                return '<div class="product-card" data-id="' + p.id + '">' +
+                    badgeHTML +
+                    '<div class="product-image-wrap">' +
+                        '<img src="' + (p.image || 'https://via.placeholder.com/130') + '" alt="' + (p.nameEn || '') + '" class="product-image" loading="lazy" onerror="this.src=\'https://via.placeholder.com/130\'" />' +
+                    '</div>' +
+                    '<span class="product-category-label">' + (p.category || 'Variety') + sizeText + '</span>' +
+                    '<h3>' +
+                        '<span class="lang-en">' + (p.nameEn || '') + '</span>' +
+                        '<span class="lang-am">' + (p.nameAm || p.nameEn || '') + '</span>' +
+                    '</h3>' +
+                    stockHTML +
+                    '<div class="product-price-row">' + priceHTML + '</div>' +
+                    '<button class="btn-add-cart" onclick="addToCart(\'' + p.id + '\')"' + (isOutOfStock ? ' disabled' : '') + '>' +
+                        '<i class="fas fa-cart-plus"></i> <span class="lang-en">Add to Cart</span><span class="lang-am">ወደ ቅርጫት</span>' +
+                    '</button>' +
+                '</div>';
+            }
+
+            function renderAllProductSections() {
+                // 1. Specials Grid
+                var specials = products.filter(function(p) { return p.isSpecial; });
+                var specialsContainer = document.getElementById('specialsGrid');
+                if (specialsContainer) {
+                    specialsContainer.innerHTML = specials.length > 0 ?
+                        specials.map(createProductCardHTML).join('') :
+                        '<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:1rem;">No current specials today. Check back tomorrow!</p>';
+                }
+
+                // 2. Liquidation Grid
+                var liquidation = products.filter(function(p) { return p.isLiquidation; });
+                var liquidationContainer = document.getElementById('liquidationGrid');
+                if (liquidationContainer) {
+                    liquidationContainer.innerHTML = liquidation.length > 0 ?
+                        liquidation.map(createProductCardHTML).join('') :
+                        '<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:1rem;">New liquidation batches arriving soon.</p>';
+                }
+
+                // 3. Habesha Grid
+                var habesha = products.filter(function(p) { return p.isHabesha || p.category === 'Habesha'; });
+                var habeshaContainer = document.getElementById('habeshaGrid');
+                if (habeshaContainer) {
+                    habeshaContainer.innerHTML = habesha.length > 0 ?
+                        habesha.map(createProductCardHTML).join('') :
+                        '<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:1rem;">Habesha products available in store.</p>';
+                }
+
+                // 4. Main Catalog (Filtered by search & category)
+                renderMainCatalog();
+            }
+
+            function renderMainCatalog() {
+                var filtered = products.filter(function(p) {
+                    var matchCat = currentCategory === 'ALL' || p.category === currentCategory;
+                    var q = searchQuery.toLowerCase().trim();
+                    var matchQuery = !q ||
+                        (p.nameEn && p.nameEn.toLowerCase().includes(q)) ||
+                        (p.nameAm && p.nameAm.toLowerCase().includes(q)) ||
+                        (p.category && p.category.toLowerCase().includes(q));
+                    return matchCat && matchQuery;
+                });
+
+                var mainGrid = document.getElementById('mainProductGrid');
+                if (mainGrid) {
+                    mainGrid.innerHTML = filtered.length > 0 ?
+                        filtered.map(createProductCardHTML).join('') :
+                        '<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:2rem;">No products match your criteria.</p>';
+                }
+
+                var countTag = document.getElementById('catalogCountTag');
+                var countTagAm = document.getElementById('catalogCountTagAm');
+                if (countTag) countTag.textContent = 'Showing ' + filtered.length + ' products';
+                if (countTagAm) countTagAm.textContent = filtered.length + ' ምርቶች ተገኝተዋል';
+            }
+
+            // CART OPERATIONS
+            window.addToCart = function(id) {
+                var p = products.find(function(x) { return String(x.id) === String(id); });
+                if (!p) return;
+
+                var existing = cart.find(function(item) { return String(item.id) === String(id); });
+                if (existing) {
+                    existing.qty += 1;
+                } else {
+                    cart.push({
+                        id: p.id,
+                        nameEn: p.nameEn,
+                        nameAm: p.nameAm || p.nameEn,
+                        price: p.salePrice || p.price || 0,
+                        image: p.image || '',
+                        qty: 1
+                    });
+                }
+                saveCartState();
+                updateCartUI();
+
+                // Open cart panel
+                var panel = document.getElementById('cartPanel');
+                if (panel) panel.classList.add('visible');
+            };
+
+            window.changeCartQty = function(id, delta) {
+                var idx = cart.findIndex(function(item) { return String(item.id) === String(id); });
+                if (idx > -1) {
+                    cart[idx].qty += delta;
+                    if (cart[idx].qty <= 0) cart.splice(idx, 1);
+                    saveCartState();
+                    updateCartUI();
+                }
+            };
+
+            window.removeCartItem = function(id) {
+                cart = cart.filter(function(item) { return String(item.id) !== String(id); });
+                saveCartState();
+                updateCartUI();
+            };
+
+            window.clearCart = function() {
+                cart = [];
+                saveCartState();
+                updateCartUI();
+                var panel = document.getElementById('cartPanel');
+                if (panel) panel.classList.remove('visible');
+            };
+
+            window.toggleCartPanel = function() {
+                var panel = document.getElementById('cartPanel');
+                if (panel) panel.classList.toggle('visible');
+            };
+
+            function getSubtotal() {
+                return cart.reduce(function(sum, item) {
+                    return sum + (item.price * item.qty);
+                }, 0);
+            }
+
+            function getDeliveryFee(subtotal) {
+                if (fulfillmentType === 'pickup') return 0;
+                if (subtotal >= 50) return 5;
+                if (subtotal >= 30) return 10;
+                return 15;
+            }
+
+            function updateCartUI() {
+                var totalQty = cart.reduce(function(s, i) { return s + i.qty; }, 0);
+                var subtotal = getSubtotal();
+                var delivery = getDeliveryFee(subtotal);
+                var total = subtotal + delivery;
+
+                // Update bottom bar
+                var bottomBar = document.getElementById('fixedBottomBar');
+                var bottomCount = document.getElementById('bottomCartCount');
+                var bottomTotal = document.getElementById('bottomCartTotal');
+                if (bottomBar) {
+                    bottomBar.classList.toggle('visible', totalQty > 0);
+                }
+                if (bottomCount) bottomCount.textContent = totalQty;
+                if (bottomTotal) bottomTotal.textContent = '$' + total.toFixed(2);
+
+                // Update cart panel list
+                var listContainer = document.getElementById('cartItemsList');
+                if (listContainer) {
+                    if (cart.length === 0) {
+                        listContainer.innerHTML = '<p style="color:var(--text-muted); padding:1rem; text-align:center;">Your cart is empty.</p>';
+                    } else {
+                        listContainer.innerHTML = cart.map(function(item) {
+                            return '<div class="cart-item-row">' +
+                                '<div class="cart-item-info">' +
+                                    '<img src="' + (item.image || 'https://via.placeholder.com/32') + '" alt="" onerror="this.src=\'https://via.placeholder.com/32\'" />' +
+                                    '<span class="cart-item-name">' + item.nameEn + '</span>' +
+                                '</div>' +
+                                '<div class="cart-item-controls">' +
+                                    '<button class="cart-qty-btn" onclick="changeCartQty(\'' + item.id + '\', -1)">−</button>' +
+                                    '<span class="cart-qty-val">' + item.qty + '</span>' +
+                                    '<button class="cart-qty-btn" onclick="changeCartQty(\'' + item.id + '\', 1)">+</button>' +
+                                '</div>' +
+                                '<div class="cart-item-price">$' + (item.price * item.qty).toFixed(2) + '</div>' +
+                                '<button class="cart-item-remove" onclick="removeCartItem(\'' + item.id + '\')"><i class="fas fa-trash"></i></button>' +
+                            '</div>';
+                        }).join('');
+                    }
+                }
+
+                // Summary lines in panel
+                var subtotalEl = document.getElementById('cartSubtotal');
+                var totalEl = document.getElementById('cartTotal');
+                var delFeeEl = document.getElementById('cartDeliveryFee');
+                var labelEl = document.getElementById('cartFulfillmentLabel');
+
+                if (subtotalEl) subtotalEl.textContent = '$' + subtotal.toFixed(2);
+                if (delFeeEl) delFeeEl.textContent = fulfillmentType === 'pickup' ? '$0.00 (FREE)' : '$' + delivery.toFixed(2);
+                if (totalEl) totalEl.textContent = '$' + total.toFixed(2);
+                if (labelEl) labelEl.textContent = fulfillmentType === 'pickup' ? 'Pickup (FREE)' : 'Delivery';
+
+                // If cart became empty, hide panel
+                var panel = document.getElementById('cartPanel');
+                if (panel && cart.length === 0) {
+                    panel.classList.remove('visible');
+                }
+            }
+
+            function saveCartState() {
+                try { localStorage.setItem('koba_cart_items', JSON.stringify(cart)); } catch(e){}
+            }
+            function loadCartState() {
+                try {
+                    var saved = localStorage.getItem('koba_cart_items');
+                    if (saved) cart = JSON.parse(saved);
+                } catch(e){}
+            }
+
+            // CHECKOUT MODAL LOGIC
+            window.openCheckoutModal = function() {
+                if (cart.length === 0) {
+                    alert('Please add products to your cart first.');
+                    return;
+                }
+                updateCheckoutTotals();
+                var modal = document.getElementById('checkoutModal');
+                if (modal) modal.classList.add('active');
+            };
+
+            window.closeCheckoutModal = function() {
+                var modal = document.getElementById('checkoutModal');
+                if (modal) modal.classList.remove('active');
+            };
+
+            window.toggleFulfillmentType = function(type) {
+                fulfillmentType = type;
+                var optPickup = document.getElementById('optPickupLabel');
+                var optDelivery = document.getElementById('optDeliveryLabel');
+                var addrGroup = document.getElementById('deliveryAddressGroup');
+                var addrInput = document.getElementById('custAddress');
+
+                if (type === 'delivery') {
+                    if (optPickup) optPickup.classList.remove('selected');
+                    if (optDelivery) optDelivery.classList.add('selected');
+                    if (addrGroup) addrGroup.style.display = 'block';
+                    if (addrInput) addrInput.required = true;
+                } else {
+                    if (optPickup) optPickup.classList.add('selected');
+                    if (optDelivery) optDelivery.classList.remove('selected');
+                    if (addrGroup) addrGroup.style.display = 'none';
+                    if (addrInput) addrInput.required = false;
+                }
+                updateCheckoutTotals();
+                updateCartUI();
+            };
+
+            window.updateCheckoutTotals = function() {
+                var subtotal = getSubtotal();
+                var deliveryFee = getDeliveryFee(subtotal);
+
+                var bagSelect = document.getElementById('checkoutBagSelect');
+                var bagFee = 0;
+                if (bagSelect) {
+                    if (bagSelect.value === 'small') bagFee = 0.50;
+                    else if (bagSelect.value === 'medium') bagFee = 1.00;
+                    else if (bagSelect.value === 'large') bagFee = 2.00;
+                }
+
+                var grandTotal = subtotal + deliveryFee + bagFee;
+
+                var modalSubtotal = document.getElementById('modalSubtotalText');
+                var modalBagFee = document.getElementById('modalBagFeeText');
+                var modalDeliveryCharge = document.getElementById('modalDeliveryChargeText');
+                var modalGrandTotal = document.getElementById('modalGrandTotalText');
+
+                if (modalSubtotal) modalSubtotal.textContent = '$' + subtotal.toFixed(2);
+                if (modalBagFee) modalBagFee.textContent = '$' + bagFee.toFixed(2);
+                if (modalDeliveryCharge) {
+                    modalDeliveryCharge.textContent = fulfillmentType === 'pickup' ?
+                        'FREE' :
+                        '$' + deliveryFee.toFixed(2) + (subtotal >= 50 ? ' (Discounted)' : '');
+                }
+                if (modalGrandTotal) modalGrandTotal.textContent = '$' + grandTotal.toFixed(2);
+            };
+
+            window.handleOrderSubmit = function(e) {
+                e.preventDefault();
+
+                var name = (document.getElementById('custName').value || '').trim();
+                var phone = (document.getElementById('custPhone').value || '').trim();
+                var address = (document.getElementById('custAddress').value || '').trim();
+                var notes = (document.getElementById('custNotes').value || '').trim();
+                var bagChoice = document.getElementById('checkoutBagSelect').value;
+
+                var subtotal = getSubtotal();
+                var deliveryFee = getDeliveryFee(subtotal);
+                var bagFee = bagChoice === 'small' ? 0.50 : (bagChoice === 'medium' ? 1.00 : (bagChoice === 'large' ? 2.00 : 0));
+                var total = subtotal + deliveryFee + bagFee;
+
+                // Build Item Lines
+                var itemsText = cart.map(function(item) {
+                    return '  • ' + item.nameEn + ' x' + item.qty + ' ($' + (item.price * item.qty).toFixed(2) + ')';
+                }).join('\n');
+
+                var msg = '🛍️ *NEW KOBA ORDER*\n' +
+                          '━━━━━━━━━━━━━━━━━━━━\n' +
+                          '👤 *Customer:* ' + name + '\n' +
+                          '📞 *Phone:* ' + phone + '\n' +
+                          '📦 *Type:* ' + (fulfillmentType === 'pickup' ? '🏪 IN-STORE PICKUP (FREE)' : '🚚 HOME DELIVERY') + '\n';
+
+                if (fulfillmentType === 'delivery') {
+                    msg += '📍 *Address:* ' + address + '\n';
+                }
+
+                msg += '🛍️ *Bag Choice:* ' + (bagChoice === 'none' ? 'No Bag' : bagChoice.toUpperCase() + ' BAG ($' + bagFee.toFixed(2) + ')') + '\n\n' +
+                       '🛒 *ITEMS ORDERED:*\n' + itemsText + '\n\n' +
+                       '━━━━━━━━━━━━━━━━━━━━\n' +
+                       '💵 *Subtotal:* $' + subtotal.toFixed(2) + '\n' +
+                       '🚚 *Delivery Fee:* $' + deliveryFee.toFixed(2) + '\n' +
+                       '🛍️ *Bag Fee:* $' + bagFee.toFixed(2) + '\n' +
+                       '💰 *TOTAL:* $' + total.toFixed(2) + '\n' +
+                       '━━━━━━━━━━━━━━━━━━━━\n';
+
+                if (notes) {
+                    msg += '📝 *Notes:* ' + notes + '\n';
+                }
+
+                // Log order in Firestore / localStorage
+                var orderRecord = {
+                    customer: name,
+                    phone: phone,
+                    deliveryType: fulfillmentType,
+                    address: fulfillmentType === 'delivery' ? address : 'In-Store Pickup',
+                    items: cart.length,
+                    total: total.toFixed(2),
+                    subtotal: subtotal.toFixed(2),
+                    deliveryFee: deliveryFee.toFixed(2),
+                    bagFee: bagFee.toFixed(2),
+                    date: new Date().toLocaleDateString(),
+                    createdAt: Date.now(),
+                    status: 'sent'
+                };
+
+                if (db) {
+                    db.collection('koba_orders').add(orderRecord).catch(function(err){ console.warn('Order log:', err); });
+                }
+
+                // Redirect to WhatsApp
+                var waUrl = 'https://wa.me/14378793601?text=' + encodeURIComponent(msg);
+                window.open(waUrl, '_blank');
+                closeCheckoutModal();
+                clearCart();
+            };
+
+            // CATEGORY & SEARCH FILTERING
+            window.filterByCategory = function(category) {
+                currentCategory = category;
+                var btns = document.querySelectorAll('.cat-btn');
+                btns.forEach(function(b) {
+                    b.classList.toggle('active', b.dataset.category === category);
+                });
+                renderMainCatalog();
+                scrollToSection('popularSection');
+            };
+
+            window.handleSearch = function(val) {
+                searchQuery = val;
+                renderMainCatalog();
+            };
+
+            // NAVIGATION & SCROLLING
+            window.navigateTo = function(page) {
+                var homeView = document.getElementById('homePageView');
+                var groupView = document.getElementById('kobaGroupView');
+
+                var navLinks = document.querySelectorAll('.nav-link');
+
+                if (page === 'koba-group') {
+                    if (homeView) homeView.classList.remove('active');
+                    if (groupView) groupView.classList.add('active');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    if (groupView) groupView.classList.remove('active');
+                    if (homeView) homeView.classList.add('active');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+
+                // Close mobile menu if open
+                var nav = document.getElementById('navMenu');
+                var subnav = document.getElementById('headerSubnav');
+                if (nav) nav.classList.remove('open');
+                if (subnav) subnav.classList.remove('open');
+            };
+
+            window.scrollToSection = function(id) {
+                navigateTo('home');
+                var el = document.getElementById(id);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                var nav = document.getElementById('navMenu');
+                var subnav = document.getElementById('headerSubnav');
+                if (nav) nav.classList.remove('open');
+                if (subnav) subnav.classList.remove('open');
+            };
+
+            // MOBILE NAV TOGGLE
+            var mobileNavBtn = document.getElementById('mobileNavToggle');
+            if (mobileNavBtn) {
+                mobileNavBtn.addEventListener('click', function() {
+                    var nav = document.getElementById('navMenu');
+                    var subnav = document.getElementById('headerSubnav');
+                    if (subnav) subnav.classList.toggle('open');
+                    if (nav) nav.classList.toggle('open');
+                });
+            }
+
+            // LANGUAGE SYSTEM (CLEAN SINGLE-LANGUAGE DISPLAY)
+            window.switchLanguage = function(lang) {
+                var btnEn = document.getElementById('btnLangEn');
+                var btnAm = document.getElementById('btnLangAm');
+                if (lang === 'am') {
+                    document.body.classList.add('lang-am-mode');
+                    if (btnEn) btnEn.classList.remove('active');
+                    if (btnAm) btnAm.classList.add('active');
+                } else {
+                    document.body.classList.remove('lang-am-mode');
+                    if (btnEn) btnEn.classList.add('active');
+                    if (btnAm) btnAm.classList.remove('active');
+                }
+                try { localStorage.setItem('koba_lang_choice', lang); } catch(e){}
+            };
+
+            function loadLanguageState() {
+                try {
+                    var saved = localStorage.getItem('koba_lang_choice');
+                    if (saved) switchLanguage(saved);
+                } catch(e){}
+            }
+
+            // THEME TOGGLE
+            window.toggleTheme = function() {
+                var isDark = document.body.classList.toggle('dark-mode');
+                var icon = document.querySelector('#themeBtn i');
+                if (icon) {
+                    icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+                }
+                try { localStorage.setItem('koba_theme_choice', isDark ? 'dark' : 'light'); } catch(e){}
+            };
+
+            function loadThemeState() {
+                try {
+                    var saved = localStorage.getItem('koba_theme_choice');
+                    if (saved === 'dark') {
+                        document.body.classList.add('dark-mode');
+                        var icon = document.querySelector('#themeBtn i');
+                        if (icon) icon.className = 'fas fa-sun';
+                    }
+                } catch(e){}
+            }
+
+
+                        // RUN
+            document.addEventListener('DOMContentLoaded', init);
+        })();
+    </script>
+</body>
+</html>

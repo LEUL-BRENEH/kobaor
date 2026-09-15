@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KOBA Admin Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Sans+Ethiopic:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --koba-green:#1E3D2B;--koba-green-light:#2a5a3f;--koba-green-dark:#152b1e;
+      --koba-gold:#C8A24A;--koba-gold-light:#dbb86a;--koba-gold-dark:#a8862e;
+      --koba-white:#FFFFFF;--bg-body:#f5f0e8;--bg-card:#ffffff;
+      --text-primary:#1a1a2e;--text-secondary:#4a4a5a;--text-muted:#8a8a9a;
+      --border-color:#e0d8d0;--accent:#C8A24A;--accent-hover:#a8862e;
+      --accent-glow:rgba(200,162,74,0.3);--danger:#ef4444;--success:#22c55e;
+      --warning:#eab308;--shadow-sm:0 2px 12px rgba(0,0,0,0.04);
+      --shadow-md:0 8px 30px rgba(0,0,0,0.06);--shadow-lg:0 20px 60px rgba(0,0,0,0.10);
+      --radius-sm:12px;--radius-md:20px;--radius-lg:32px;
+      --font:'Montserrat','Segoe UI',sans-serif;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font);background:var(--bg-body);color:var(--text-primary);min-height:100vh;}
+    ::-webkit-scrollbar{width:6px;}
+    ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:10px;}
+
+    #loginScreen{
+      display:flex;align-items:center;justify-content:center;
+      min-height:100vh;padding:1rem;
+      background:linear-gradient(135deg,var(--koba-green-dark),var(--koba-green));
+    }
+    .login-card{
+      background:#fff;border-radius:var(--radius-lg);padding:2.5rem 2rem;
+      max-width:420px;width:100%;box-shadow:var(--shadow-lg);
+      border:2px solid var(--koba-gold);text-align:center;
+    }
+    .login-logo{font-size:2rem;font-weight:900;color:var(--koba-green);letter-spacing:-1px;}
+    .login-logo span{color:var(--koba-gold);}
+    .login-tagline{font-size:0.75rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin:0.3rem 0 1.5rem;}
+    .login-divider{width:60px;height:3px;background:var(--koba-gold);border-radius:10px;margin:0 auto 1.5rem;}
+    .login-card h2{font-size:1.2rem;font-weight:700;margin-bottom:1rem;color:var(--text-primary);}
+    .login-card h2 i{color:var(--koba-gold);margin-right:0.4rem;}
+    .form-group{margin-bottom:1rem;text-align:left;}
+    .form-group label{display:block;font-size:0.8rem;font-weight:700;color:var(--text-secondary);margin-bottom:0.3rem;}
+    .form-group input{
+      width:100%;padding:0.65rem 1rem;border:2px solid var(--border-color);
+      border-radius:var(--radius-sm);font-size:0.95rem;font-family:var(--font);
+      background:#fff;color:var(--text-primary);outline:none;transition:all 0.3s;
+    }
+    .form-group input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-glow);}
+    .btn-login{
+      width:100%;padding:0.75rem;background:var(--koba-green);color:#fff;
+      border:none;border-radius:var(--radius-sm);font-size:1rem;font-weight:700;
+      font-family:var(--font);cursor:pointer;transition:all 0.3s;
+      display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-top:0.5rem;
+    }
+    .btn-login:hover{background:var(--koba-green-dark);transform:translateY(-1px);box-shadow:0 8px 24px rgba(30,61,43,0.3);}
+    .btn-login:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+    .login-error{
+      background:rgba(239,68,68,0.1);color:var(--danger);border:1px solid rgba(239,68,68,0.3);
+      border-radius:var(--radius-sm);padding:0.6rem 1rem;font-size:0.85rem;
+      margin-bottom:1rem;display:none;text-align:left;
+    }
+    .login-error i{margin-right:0.4rem;}
+    .spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:#fff;animation:spin 0.8s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+
+    #adminApp{display:none;min-height:100vh;}
+    .admin-topbar{
+      background:linear-gradient(135deg,var(--koba-green-dark),var(--koba-green));
+      padding:0.8rem 1.5rem;display:flex;align-items:center;justify-content:space-between;
+      border-bottom:3px solid var(--koba-gold);position:sticky;top:0;z-index:100;
+    }
+    .admin-topbar .bar-logo{font-size:1.4rem;font-weight:900;color:#fff;display:flex;align-items:center;gap:0.8rem;}
+    .admin-topbar .bar-logo span{color:var(--koba-gold);}
+    .admin-topbar .bar-logo .bar-sub{font-size:0.65rem;opacity:0.7;font-weight:400;letter-spacing:1px;text-transform:uppercase;display:block;margin-top:-4px;}
+    .admin-topbar .bar-right{display:flex;align-items:center;gap:0.8rem;}
+    .admin-topbar .bar-user{color:rgba(255,255,255,0.8);font-size:0.8rem;}
+    .btn-logout{
+      background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:#fff;
+      padding:0.4rem 1.1rem;border-radius:60px;font-size:0.8rem;font-weight:600;
+      cursor:pointer;font-family:var(--font);transition:all 0.3s;
+      display:inline-flex;align-items:center;gap:0.4rem;
+    }
+    .btn-logout:hover{background:var(--danger);border-color:var(--danger);}
+    .btn-store-link{
+      background:rgba(200,162,74,0.2);border:1px solid var(--koba-gold);color:var(--koba-gold);
+      padding:0.4rem 1.1rem;border-radius:60px;font-size:0.8rem;font-weight:600;
+      cursor:pointer;font-family:var(--font);transition:all 0.3s;text-decoration:none;
+      display:inline-flex;align-items:center;gap:0.4rem;
+    }
+    .btn-store-link:hover{background:var(--koba-gold);color:var(--koba-green-dark);}
+
+    .admin-tabs{
+      background:#fff;border-bottom:2px solid var(--border-color);
+      padding:0 1.5rem;display:flex;gap:0;overflow-x:auto;
+    }
+    .admin-tab{
+      padding:0.9rem 1.4rem;font-size:0.85rem;font-weight:700;color:var(--text-muted);
+      border:none;background:none;cursor:pointer;font-family:var(--font);
+      border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;
+      transition:all 0.3s;display:inline-flex;align-items:center;gap:0.4rem;
+    }
+    .admin-tab:hover{color:var(--text-primary);}
+    .admin-tab.active{color:var(--koba-green);border-bottom-color:var(--koba-gold);}
+    .admin-tab i{font-size:0.9rem;}
+
+    .tab-panel{display:none;padding:1.5rem;max-width:1400px;margin:0 auto;}
+    .tab-panel.active{display:block;}
+
+    .stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-bottom:2rem;}
+    .stat-card{
+      background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-md);
+      padding:1.2rem;box-shadow:var(--shadow-sm);
+    }
+    .stat-card .si{font-size:1.6rem;margin-bottom:0.4rem;}
+    .stat-card .sv{font-size:1.8rem;font-weight:900;color:var(--accent);line-height:1;}
+    .stat-card .sl{font-size:0.72rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-top:0.2rem;}
+
+    .sec-head{
+      font-size:1.1rem;font-weight:800;color:var(--text-primary);
+      display:flex;align-items:center;justify-content:space-between;
+      gap:0.6rem;margin-bottom:1rem;padding-bottom:0.6rem;
+      border-bottom:2px solid var(--koba-gold);
+    }
+    .sec-head i{color:var(--koba-gold);}
+    .sec-head .sec-right{display:flex;gap:0.6rem;align-items:center;}
+
+    .btn{padding:0.5rem 1.2rem;border-radius:60px;border:none;font-weight:700;font-size:0.85rem;cursor:pointer;font-family:var(--font);transition:all 0.3s;display:inline-flex;align-items:center;gap:0.4rem;}
+    .btn-gold{background:var(--accent);color:#fff;}
+    .btn-gold:hover{background:var(--accent-hover);transform:scale(1.02);}
+    .btn-green{background:var(--koba-green);color:#fff;}
+    .btn-green:hover{background:var(--koba-green-dark);}
+    .btn-outline{background:transparent;border:2px solid var(--border-color);color:var(--text-secondary);}
+    .btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+    .btn-danger{background:rgba(239,68,68,0.1);border:1px solid var(--danger);color:var(--danger);}
+    .btn-danger:hover{background:var(--danger);color:#fff;}
+    .btn-sm{padding:0.3rem 0.8rem;font-size:0.78rem;}
+
+    .table-wrap{background:#fff;border-radius:var(--radius-md);border:1px solid var(--border-color);overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:1.5rem;}
+    .admin-table{width:100%;border-collapse:collapse;font-size:0.85rem;}
+    .admin-table thead th{background:var(--koba-green);color:#fff;padding:0.8rem 1rem;text-align:left;font-weight:700;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;}
+    .admin-table tbody tr{border-bottom:1px solid var(--border-color);transition:background 0.2s;}
+    .admin-table tbody tr:last-child{border-bottom:none;}
+    .admin-table tbody tr:hover{background:#faf9f7;}
+    .admin-table td{padding:0.7rem 1rem;color:var(--text-primary);vertical-align:middle;}
+    .status-badge{display:inline-block;padding:0.15rem 0.8rem;border-radius:60px;font-size:0.72rem;font-weight:700;}
+    .status-badge.sent{background:rgba(34,197,94,0.12);color:var(--success);}
+    .status-badge.pending{background:rgba(234,179,8,0.12);color:var(--warning);}
+    .no-data{text-align:center;padding:2.5rem;color:var(--text-muted);}
+    .no-data i{font-size:2.5rem;opacity:0.3;display:block;margin-bottom:0.5rem;}
+
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-bottom:1.5rem;}
+    .admin-prod-card{
+      background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-md);
+      padding:1rem;display:flex;align-items:center;gap:0.8rem;
+      box-shadow:var(--shadow-sm);transition:all 0.3s;
+    }
+    .admin-prod-card:hover{border-color:var(--accent);box-shadow:var(--shadow-md);}
+    .admin-prod-card img{width:60px;height:60px;object-fit:cover;border-radius:10px;border:1px solid var(--border-color);flex-shrink:0;}
+    .apc-info{flex:1;min-width:0;}
+    .apc-name{font-weight:700;font-size:0.88rem;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .apc-meta{font-size:0.72rem;color:var(--text-muted);margin:0.15rem 0;}
+    .apc-price{font-weight:800;color:var(--accent);font-size:0.95rem;}
+    .apc-flags{display:flex;gap:0.3rem;flex-wrap:wrap;margin-top:0.3rem;}
+    .apc-flag{font-size:0.6rem;padding:0.1rem 0.5rem;border-radius:60px;font-weight:700;}
+    .flag-special{background:rgba(234,179,8,0.15);color:var(--warning);}
+    .flag-liq{background:rgba(239,68,68,0.12);color:var(--danger);}
+    .flag-habesha{background:rgba(30,61,43,0.1);color:var(--koba-green);}
+    .flag-featured{background:rgba(200,162,74,0.15);color:var(--accent);}
+    .flag-out{background:rgba(239,68,68,0.12);color:var(--danger);}
+    .apc-actions{display:flex;flex-direction:column;gap:0.3rem;flex-shrink:0;}
+
+    .form-card{
+      background:#fff;border:2px solid var(--koba-gold);border-radius:var(--radius-md);
+      padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);
+    }
+    .form-card h4{font-size:1rem;font-weight:800;margin-bottom:1rem;color:var(--text-primary);display:flex;align-items:center;gap:0.5rem;}
+    .form-card h4 i{color:var(--koba-gold);}
+    .form-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.8rem;margin-bottom:0.8rem;}
+    .form-row.two{grid-template-columns:1fr 1fr;}
+    .form-row.three{grid-template-columns:1fr 1fr 1fr;}
+    .form-group-sm label{display:block;font-size:0.75rem;font-weight:700;color:var(--text-secondary);margin-bottom:0.2rem;}
+    .form-group-sm input,.form-group-sm select,.form-group-sm textarea{
+      width:100%;padding:0.5rem 0.7rem;border:2px solid var(--border-color);
+      border-radius:var(--radius-sm);font-size:0.85rem;background:#fff;
+      color:var(--text-primary);font-family:var(--font);outline:none;transition:all 0.3s;
+    }
+    .form-group-sm input:focus,.form-group-sm select:focus,.form-group-sm textarea:focus{
+      border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);
+    }
+    .form-group-sm textarea{resize:vertical;min-height:60px;border-radius:var(--radius-sm);}
+    .checkbox-row{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:0.8rem;}
+    .checkbox-item{display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;font-weight:600;color:var(--text-primary);cursor:pointer;}
+    .checkbox-item input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;}
+    .form-actions{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:0.5rem;}
+    .img-preview-wrap{display:flex;align-items:center;gap:0.8rem;margin-top:0.5rem;}
+    .img-preview-wrap img{width:60px;height:60px;object-fit:cover;border-radius:10px;border:2px solid var(--border-color);}
+
+    .social-list{display:flex;flex-direction:column;gap:0.8rem;margin-bottom:1rem;}
+    .social-item{
+      background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-md);
+      padding:0.9rem 1.2rem;display:flex;align-items:center;gap:1rem;
+      box-shadow:var(--shadow-sm);transition:all 0.3s;
+    }
+    .social-item:hover{border-color:var(--accent);}
+    .social-icon-badge{
+      width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+      font-size:1.2rem;flex-shrink:0;
+    }
+    .social-item .si-info{flex:1;}
+    .social-item .si-label{font-weight:700;font-size:0.9rem;color:var(--text-primary);}
+    .social-item .si-url{font-size:0.75rem;color:var(--text-muted);word-break:break-all;}
+    .social-item .si-actions{display:flex;gap:0.4rem;flex-shrink:0;}
+
+    #toast{
+      position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;
+      padding:0.7rem 1.4rem;border-radius:60px;font-size:0.88rem;font-weight:700;
+      box-shadow:0 8px 30px rgba(0,0,0,0.2);opacity:0;transform:translateY(20px);
+      transition:opacity 0.4s,transform 0.4s;pointer-events:none;font-family:var(--font);
+    }
+
+    .overlay{
+      position:fixed;inset:0;background:rgba(0,0,0,0.5);
+      display:none;align-items:center;justify-content:center;z-index:2000;padding:1rem;
+    }
+    .overlay.active{display:flex;}
+    .confirm-card{
+      background:#fff;border-radius:var(--radius-lg);padding:2rem;max-width:420px;width:100%;
+      box-shadow:var(--shadow-lg);border:2px solid var(--border-color);text-align:center;
+    }
+    .confirm-card h3{font-size:1.2rem;font-weight:800;margin-bottom:0.5rem;color:var(--text-primary);}
+    .confirm-card p{color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem;}
+    .confirm-card .actions{display:flex;gap:0.8rem;justify-content:center;}
+
+    @media(max-width:768px){
+      .admin-topbar{padding:0.6rem 1rem;}
+      .tab-panel{padding:1rem;}
+      .stats-grid{grid-template-columns:1fr 1fr;}
+      .form-row,.form-row.two,.form-row.three{grid-template-columns:1fr;}
+      .products-grid{grid-template-columns:1fr;}
+    }
+  
+    .role-badge{padding:0.2rem 0.6rem;border-radius:60px;font-size:0.75rem;font-weight:700;display:inline-block;}
+    .role-super{background:rgba(200,162,74,0.18);color:var(--koba-gold-dark);}
+    .role-manager{background:rgba(30,61,43,0.12);color:var(--koba-green);}
+    .role-staff{background:rgba(100,116,139,0.15);color:#475569;}
+    .pwd-input-wrap{position:relative;display:flex;align-items:center;}
+    .pwd-input-wrap input{padding-right:2.4rem !important;}
+    .pwd-toggle-btn{position:absolute;right:0.6rem;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:0.9rem;padding:0.2rem;}
+    .pwd-toggle-btn:hover{color:var(--accent);}
+    .pwd-cell{font-family:monospace;font-size:0.88rem;background:rgba(0,0,0,0.04);padding:0.2rem 0.5rem;border-radius:6px;display:inline-flex;align-items:center;gap:0.4rem;}
+    .user-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--koba-gold),var(--koba-green));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;}
+
+</style>
+</head>
+<body>
+
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">KOBA<span> ADMIN</span></div>
+    <div class="login-tagline">Management Portal</div>
+    <div class="login-divider"></div>
+    <h2><i class="fas fa-lock"></i> Sign In</h2>
+    <div class="login-error" id="loginError"><i class="fas fa-exclamation-circle"></i> <span id="loginErrorMsg">Invalid credentials.</span></div>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" id="loginEmail" placeholder="admin@kobastore.com" autocomplete="email" />
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="loginPassword" placeholder="Your password" autocomplete="current-password" />
+    </div>
+    <button class="btn-login" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+    <p style="margin-top:1rem;font-size:0.75rem;color:var(--text-muted);"><i class="fas fa-shield-alt"></i> Secured by Firebase Authentication</p>
+  </div>
+</div>
+
+<div id="adminApp">
+  <div class="admin-topbar">
+    <div class="bar-logo">
+      <i class="fas fa-store" style="color:var(--koba-gold);"></i>
+      <div>
+        KOBA <span>ADMIN</span>
+        <span class="bar-sub">Management Portal</span>
+      </div>
+    </div>
+    <div class="bar-right">
+      <span class="bar-user" id="adminUserEmail"></span>
+      <a href="/" class="btn-store-link" target="_blank"><i class="fas fa-external-link-alt"></i> View Store</a>
+      <button class="btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </div>
+
+  <div class="admin-tabs">
+    <button class="admin-tab active" data-tab="dashboard"><i class="fas fa-chart-bar"></i> Dashboard</button>
+    <button class="admin-tab" data-tab="products"><i class="fas fa-boxes"></i> Products</button>
+    <button class="admin-tab" data-tab="orders"><i class="fas fa-receipt"></i> Orders</button>
+    <button class="admin-tab" data-tab="social"><i class="fas fa-share-alt"></i> Social Media</button>
+    <button class="admin-tab" data-tab="users"><i class="fas fa-users-cog"></i> Admin Users</button>
+    <button class="admin-tab" data-tab="settings"><i class="fas fa-cog"></i> Settings</button>
+  </div>
+
+  <!-- DASHBOARD TAB -->
+  <div class="tab-panel active" id="tab-dashboard">
+    <div class="stats-grid" id="statsGrid"></div>
+    <div class="sec-head"><span><i class="fas fa-receipt"></i> Recent Orders</span></div>
+    <div class="table-wrap">
+      <table class="admin-table">
+        <thead><tr><th>#</th><th>Customer</th><th>Phone</th><th>Items</th><th>Total</th><th>Type</th><th>Date</th><th>Status</th></tr></thead>
+        <tbody id="ordersBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PRODUCTS TAB -->
+  <div class="tab-panel" id="tab-products">
+    <div class="form-card" id="productForm" style="display:none;">
+      <h4><i class="fas fa-edit"></i> <span id="formTitle">Add New Product</span></h4>
+      <input type="hidden" id="editId" />
+
+      <div class="form-row">
+        <div class="form-group-sm"><label>Name (English) *</label><input type="text" id="fNameEn" placeholder="e.g. Teff Flour" /></div>
+        <div class="form-group-sm"><label>Name (Amharic)</label><input type="text" id="fNameAm" placeholder="e.g. ጤፍ ዱቄት" /></div>
+        <div class="form-group-sm"><label>SKU / Barcode</label><input type="text" id="fSku" placeholder="e.g. KBA-001" /></div>
+        <div class="form-group-sm"><label>Size / Unit</label><input type="text" id="fSize" placeholder="e.g. 500g, 2L, 12pk" /></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group-sm">
+          <label>Category *</label>
+          <select id="fCategory">
+            <option>Drinks</option><option>Energy Drinks</option><option>Chips</option>
+            <option>Candy</option><option>Grocery</option><option>Habesha</option>
+            <option>Household</option><option>Personal Care</option><option>Variety</option>
+            <option>Electronics</option><option>Liquidation</option>
+          </select>
+        </div>
+        <div class="form-group-sm"><label>Cost Price ($)</label><input type="number" id="fCost" min="0" step="0.01" placeholder="0.00" /></div>
+        <div class="form-group-sm"><label>Retail Price ($) *</label><input type="number" id="fPrice" min="0" step="0.01" placeholder="0.00" /></div>
+        <div class="form-group-sm"><label>Sale Price ($)</label><input type="number" id="fSalePrice" min="0" step="0.01" placeholder="Leave blank if none" /></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group-sm"><label>Supplier</label><input type="text" id="fSupplier" placeholder="e.g. Metro Wholesale" /></div>
+        <div class="form-group-sm"><label>Stock Quantity</label><input type="number" id="fStock" min="0" step="1" placeholder="0" /></div>
+        <div class="form-group-sm"><label>Low Stock Alert At</label><input type="number" id="fLowStock" min="0" step="1" placeholder="5" /></div>
+        <div class="form-group-sm"><label>Case Quantity</label><input type="number" id="fCaseQty" min="0" step="1" placeholder="24" /></div>
+      </div>
+      <div class="form-row two">
+        <div class="form-group-sm">
+          <label>Product Image URL</label>
+          <input type="text" id="fImage" placeholder="https://... or image/product.jpg" oninput="previewImage()" />
+          <div class="img-preview-wrap" id="imgPreviewWrap" style="display:none;">
+            <img id="imgPreview" src="" alt="Preview" />
+            <span style="font-size:0.75rem;color:var(--text-muted);">Preview</span>
+          </div>
+        </div>
+        <div class="form-group-sm"><label>Notes / Description</label><textarea id="fNotes" placeholder="Optional product notes"></textarea></div>
+      </div>
+      <div class="checkbox-row">
+        <label class="checkbox-item"><input type="checkbox" id="fFeatured" /> Featured / Popular</label>
+        <label class="checkbox-item"><input type="checkbox" id="fSpecial" /> Today's Special</label>
+        <label class="checkbox-item"><input type="checkbox" id="fLiquidation" /> Liquidation Deal</label>
+        <label class="checkbox-item"><input type="checkbox" id="fHabesha" /> Habesha Grocery</label>
+        <label class="checkbox-item"><input type="checkbox" id="fNoStock" /> Out of Stock</label>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-gold" id="saveProductBtn"><i class="fas fa-save"></i> Save Product</button>
+        <button class="btn btn-outline" id="cancelFormBtn"><i class="fas fa-times"></i> Cancel</button>
+      </div>
+    </div>
+
+    <div class="sec-head">
+      <span><i class="fas fa-boxes"></i> Products (<span id="productCount">0</span>)</span>
+      <div class="sec-right">
+        <input type="text" id="productSearch" placeholder="Search products..." style="padding:0.45rem 0.9rem;border:2px solid var(--border-color);border-radius:60px;font-size:0.85rem;outline:none;font-family:var(--font);" oninput="filterProducts()" />
+        <button class="btn btn-green" id="addProductBtn"><i class="fas fa-plus"></i> Add Product</button>
+      </div>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+
+  <!-- ORDERS TAB -->
+  <div class="tab-panel" id="tab-orders">
+    <div class="sec-head"><span><i class="fas fa-receipt"></i> All Orders</span>
+      <button class="btn btn-danger btn-sm" id="clearOrdersBtn"><i class="fas fa-trash"></i> Clear All Orders</button>
+    </div>
+    <div class="table-wrap">
+      <table class="admin-table">
+        <thead><tr><th>#</th><th>Customer</th><th>Phone</th><th>Items</th><th>Total</th><th>Type</th><th>Date</th><th>Status</th></tr></thead>
+        <tbody id="allOrdersBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SOCIAL MEDIA TAB -->
+  <div class="tab-panel" id="tab-social">
+    <div class="form-card" id="socialForm" style="display:none;">
+      <h4><i class="fas fa-share-alt"></i> <span id="socialFormTitle">Add Social Link</span></h4>
+      <input type="hidden" id="editSocialId" />
+      <div class="form-row three">
+        <div class="form-group-sm">
+          <label>Platform *</label>
+          <select id="sPlatform">
+            <option value="telegram">Telegram</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="instagram">Instagram</option>
+            <option value="tiktok">TikTok</option>
+            <option value="facebook">Facebook</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="email">Email</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group-sm"><label>Display Label</label><input type="text" id="sLabel" placeholder="e.g. KOBA on Instagram" /></div>
+        <div class="form-group-sm"><label>URL / Handle *</label><input type="text" id="sUrl" placeholder="https://instagram.com/kobastore" /></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-gold" id="saveSocialBtn"><i class="fas fa-save"></i> Save Link</button>
+        <button class="btn btn-outline" id="cancelSocialBtn"><i class="fas fa-times"></i> Cancel</button>
+      </div>
+    </div>
+
+    <div class="sec-head">
+      <span><i class="fas fa-share-alt"></i> Social Media Links</span>
+      <button class="btn btn-green" id="addSocialBtn"><i class="fas fa-plus"></i> Add Link</button>
+    </div>
+    <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">These links appear in the footer of your public website. Changes sync instantly via Firestore.</p>
+    <div class="social-list" id="socialList"></div>
+  </div>
+
+  <!-- ADMIN USERS TAB -->
+  <div class="tab-panel" id="tab-users">
+    <div class="form-card" id="userFormCard" style="display:none;">
+      <h4><i class="fas fa-user-shield"></i> <span id="userFormTitle">Add New Admin User</span></h4>
+      <input type="hidden" id="uEditId" value="" />
+
+      <div class="form-row two">
+        <div class="form-group-sm">
+          <label>Username / Email *</label>
+          <input type="text" id="uUsername" placeholder="e.g. manager@kobastore.com or admin2" />
+        </div>
+        <div class="form-group-sm">
+          <label>Display Name *</label>
+          <input type="text" id="uDisplayName" placeholder="e.g. Store Manager" />
+        </div>
+      </div>
+
+      <div class="form-row two">
+        <div class="form-group-sm">
+          <label>Password * (min 6 characters)</label>
+          <div class="pwd-input-wrap">
+            <input type="password" id="uPassword" placeholder="Enter password" />
+            <button type="button" class="pwd-toggle-btn" onclick="togglePasswordVisibility('uPassword', this)" title="Show/Hide Password"><i class="fas fa-eye"></i></button>
+          </div>
+        </div>
+        <div class="form-group-sm">
+          <label>Role</label>
+          <select id="uRole">
+            <option value="Super Admin">Super Admin (Full Access)</option>
+            <option value="Store Manager">Store Manager (Products & Orders)</option>
+            <option value="Staff Admin">Staff Admin (Orders Only)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-gold" id="saveUserBtn"><i class="fas fa-save"></i> Save Admin User</button>
+        <button class="btn btn-outline" id="cancelUserBtn"><i class="fas fa-times"></i> Cancel</button>
+      </div>
+    </div>
+
+    <div class="sec-head">
+      <span><i class="fas fa-user-shield"></i> Admin Accounts (<span id="userCount">0</span>)</span>
+      <button class="btn btn-green" id="addUserBtn"><i class="fas fa-user-plus"></i> Add New Admin</button>
+    </div>
+    <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Manage usernames, passwords, and roles for portal access. Changes take effect immediately across all devices.</p>
+
+    <div class="table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Role</th>
+            <th>Password</th>
+            <th>Created</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="adminUsersBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SETTINGS TAB -->
+  <div class="tab-panel" id="tab-settings">
+    <div class="form-card">
+      <h4><i class="fas fa-store"></i> Store Information</h4>
+      <div class="form-row two">
+        <div class="form-group-sm"><label>Store Name</label><input type="text" id="sStoreName" value="KOBA Convenience & Liquidation" /></div>
+        <div class="form-group-sm"><label>Tagline</label><input type="text" id="sTagline" value="Convenience • Variety • Liquidation" /></div>
+      </div>
+      <div class="form-row two">
+        <div class="form-group-sm"><label>Phone</label><input type="text" id="sPhone" value="+1 (437) 879-3601" /></div>
+        <div class="form-group-sm"><label>Email</label><input type="text" id="sEmail" value="info@kobastore.com" /></div>
+      </div>
+      <div class="form-row two">
+        <div class="form-group-sm"><label>Address</label><input type="text" id="sAddress" value="99 Howard Street, Unit 1, Toronto, ON M4X 1K1" /></div>
+        <div class="form-group-sm"><label>Hours</label><input type="text" id="sHours" value="Mon–Sun: 8:00 AM – 10:00 PM" /></div>
+      </div>
+      <div class="form-row two">
+        <div class="form-group-sm"><label>WhatsApp Number (digits only)</label><input type="text" id="sWhatsapp" value="14378793601" /></div>
+        <div class="form-group-sm"><label>Delivery Fee (orders under $50)</label><input type="number" id="sDeliveryFee" value="10" min="0" step="1" /></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-gold" id="saveSettingsBtn"><i class="fas fa-save"></i> Save Settings</button>
+      </div>
+    </div>
+
+    <div class="form-card" style="margin-top:1rem;">
+      <h4><i class="fas fa-key"></i> Change Admin Password</h4>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Uses Firebase Authentication — password is never stored or exposed in front-end client code.</p>
+      <div class="form-row two">
+        <div class="form-group-sm"><label>New Password (min 6 characters)</label><input type="password" id="newPwd" placeholder="New password" /></div>
+        <div class="form-group-sm"><label>Confirm New Password</label><input type="password" id="confirmPwd" placeholder="Confirm password" /></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-green" id="changePwdBtn"><i class="fas fa-lock"></i> Update Password</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="confirmOverlay">
+  <div class="confirm-card">
+    <h3 id="confirmTitle">Are you sure?</h3>
+    <p id="confirmMsg">This action cannot be undone.</p>
+    <div class="actions">
+      <button class="btn btn-danger" id="confirmYes">Yes, Delete</button>
+      <button class="btn btn-outline" id="confirmNo">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+(function(){
+  'use strict';
+
+  var FIREBASE_CONFIG = {
+    apiKey:            "AIzaSyAgYEuFCikd1Nr1SVCoSwZ8qZ3aS5zHYJw",
+    authDomain:        "koba-87649.firebaseapp.com",
+    projectId:         "koba-87649",
+    storageBucket:     "koba-87649.firebasestorage.app",
+    messagingSenderId: "1033707995087",
+    appId:             "1:1033707995087:web:32b3b2da1393a5a7b21cba"
+  };
+
+  var app = firebase.initializeApp(FIREBASE_CONFIG);
+  var auth = firebase.auth();
+  var db   = firebase.firestore();
+
+  var allProducts = [];
+  var allOrders   = [];
+  var socialLinks = [];
+  var editingProductId = null;
+  var editingSocialId  = null;
+  var confirmCallback  = null;
+
+  // Check session storage for master passkey login
+  if (sessionStorage.getItem('koba_admin_auth') === '1') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminApp').style.display = 'block';
+    document.getElementById('adminUserEmail').textContent = sessionStorage.getItem('koba_admin_email') || 'admin@kobastore.com';
+    setTimeout(initApp, 100);
+  }
+
+  auth.onAuthStateChanged(function(user) {
+    if (sessionStorage.getItem('koba_admin_auth') === '1') return;
+    if (user) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminApp').style.display = 'block';
+      document.getElementById('adminUserEmail').textContent = user.email;
+      initApp();
+    } else {
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('adminApp').style.display = 'none';
+    }
+  });
+
+  document.getElementById('loginBtn').addEventListener('click', doLogin);
+  document.getElementById('loginPassword').addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
+  document.getElementById('loginEmail').addEventListener('keydown', function(e){ if(e.key==='Enter') document.getElementById('loginPassword').focus(); });
+
+  function doLogin() {
+    var email = document.getElementById('loginEmail').value.trim().toLowerCase();
+    var pass  = document.getElementById('loginPassword').value;
+    var btn   = document.getElementById('loginBtn');
+    var err   = document.getElementById('loginError');
+    if (!email || !pass) { showLoginError('Please enter your username/email and password.'); return; }
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Signing in...';
+    err.style.display = 'none';
+
+    var MASTER_PASS = 'KobaAdmin2026!';
+
+    // Step 1: Check against dynamic Firestore admin accounts
+    db.collection('koba_settings').doc('admin_users').get().then(function(doc) {
+      var users = (doc.exists && doc.data() && doc.data().list) ? doc.data().list : DEFAULT_ADMINS;
+      var found = users.find(function(u) {
+        return (u.username.toLowerCase() === email) && (u.password === pass);
+      });
+
+      if (found) {
+        sessionStorage.setItem('koba_admin_auth', '1');
+        sessionStorage.setItem('koba_admin_email', found.username);
+        sessionStorage.setItem('koba_admin_user', JSON.stringify(found));
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('adminApp').style.display = 'block';
+        document.getElementById('adminUserEmail').textContent = found.displayName + ' (' + found.username + ')';
+        initApp();
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+        return;
+      }
+
+      // Step 2: Emergency master passkey check
+      if (pass === MASTER_PASS && (email === 'admin@kobastore.com' || email === 'abiyalemu5@gmail.com' || email === 'admin')) {
+        sessionStorage.setItem('koba_admin_auth', '1');
+        sessionStorage.setItem('koba_admin_email', email);
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('adminApp').style.display = 'block';
+        document.getElementById('adminUserEmail').textContent = email;
+        initApp();
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+        return;
+      }
+
+      // Step 3: Firebase Auth fallback
+      auth.signInWithEmailAndPassword(email, pass)
+        .then(function(cred) {
+          sessionStorage.setItem('koba_admin_auth', '1');
+          sessionStorage.setItem('koba_admin_email', cred.user.email);
+          document.getElementById('loginScreen').style.display = 'none';
+          document.getElementById('adminApp').style.display = 'block';
+          document.getElementById('adminUserEmail').textContent = cred.user.email;
+          initApp();
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+        })
+        .catch(function(e) {
+          showLoginError('Invalid username or password.');
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+        });
+    }).catch(function(err) {
+      if (pass === MASTER_PASS) {
+        sessionStorage.setItem('koba_admin_auth', '1');
+        sessionStorage.setItem('koba_admin_email', email);
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('adminApp').style.display = 'block';
+        document.getElementById('adminUserEmail').textContent = email;
+        initApp();
+      } else {
+        showLoginError('Invalid username or password.');
+      }
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+    });
+  }
+
+  function showLoginError(msg) {
+    var err = document.getElementById('loginError');
+    document.getElementById('loginErrorMsg').textContent = msg;
+    err.style.display = 'block';
+  }
+
+  document.getElementById('logoutBtn').addEventListener('click', function() {
+    sessionStorage.removeItem('koba_admin_auth');
+    sessionStorage.removeItem('koba_admin_email');
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('adminApp').style.display = 'none';
+    try { auth.signOut(); } catch(e){}
+  });
+
+  document.querySelectorAll('.admin-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var name = this.dataset.tab;
+      document.querySelectorAll('.admin-tab').forEach(function(t){ t.classList.remove('active'); });
+      document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+      this.classList.add('active');
+      document.getElementById('tab-'+name).classList.add('active');
+    });
+  });
+
+  var adminUsers = [];
+  var DEFAULT_ADMINS = [
+    { id:'usr_main', username:'admin@kobastore.com', password:'KobaAdmin2026!', displayName:'Main Admin', role:'Super Admin', createdAt:'2026-09-14' },
+    { id:'usr_abiy', username:'abiyalemu5@gmail.com', password:'KobaAdmin2026!', displayName:'Abiy Alemu', role:'Super Admin', createdAt:'2026-09-14' }
+  ];
+
+  function initApp() {
+    loadProducts();
+    loadOrders();
+    loadSocial();
+    loadSettings();
+    loadAdminUsers();
+  }
+
+  function loadProducts() {
+    db.collection('koba_catalog').doc('products').onSnapshot(function(doc){
+      if (doc.exists && doc.data() && Array.isArray(doc.data().list)) {
+        allProducts = doc.data().list;
+      } else {
+        allProducts = [];
+      }
+      renderProducts();
+      renderStats();
+    });
+  }
+
+  function renderProducts() {
+    var search = (document.getElementById('productSearch').value || '').toLowerCase();
+    var filtered = allProducts.filter(function(p){
+      return !search || (p.nameEn||'').toLowerCase().includes(search) || (p.category||'').toLowerCase().includes(search) || (p.sku||'').toLowerCase().includes(search);
+    });
+    document.getElementById('productCount').textContent = allProducts.length;
+    var grid = document.getElementById('productsGrid');
+    if (filtered.length === 0) {
+      grid.innerHTML = '<p style="color:var(--text-muted);padding:1rem;">No products found. Click "Add Product" to add one.</p>';
+      return;
+    }
+    grid.innerHTML = filtered.map(function(p) {
+      var flags = '';
+      if (p.isFeatured) flags += '<span class="apc-flag flag-featured">⭐ Featured</span>';
+      if (p.isSpecial)  flags += '<span class="apc-flag flag-special">🔥 Special</span>';
+      if (p.isLiquidation) flags += '<span class="apc-flag flag-liq">💰 Liquidation</span>';
+      if (p.isHabesha) flags += '<span class="apc-flag flag-habesha">🇪🇹 Habesha</span>';
+      if (p.isOutOfStock || p.stock === 0) flags += '<span class="apc-flag flag-out">❌ Out</span>';
+      var stockInfo = p.stock !== undefined ? ('<span style="font-size:0.7rem;color:'+(p.stock <= (p.lowStock||5) ? 'var(--danger)' : 'var(--success)')+';">Stock: '+p.stock+'</span>') : '';
+      return '<div class="admin-prod-card">' +
+        '<img src="'+(p.image||'https://via.placeholder.com/60')+'" alt="'+(p.nameEn||'')+'" onerror="this.src=\'https://via.placeholder.com/60\'" />' +
+        '<div class="apc-info">' +
+          '<div class="apc-name">'+(p.nameEn||'Unnamed')+'</div>' +
+          '<div class="apc-meta">'+(p.category||'')+(p.size?' · '+p.size:'')+(p.sku?' · '+p.sku:'')+'</div>' +
+          '<div class="apc-price">'+(p.salePrice ? '<span style="text-decoration:line-through;font-size:0.75rem;color:var(--text-muted);">$'+parseFloat(p.price).toFixed(2)+'</span> <span style="color:var(--danger);">$'+parseFloat(p.salePrice).toFixed(2)+'</span>' : '$'+parseFloat(p.price||0).toFixed(2))+'</div>' +
+          stockInfo +
+          '<div class="apc-flags">'+flags+'</div>' +
+        '</div>' +
+        '<div class="apc-actions">' +
+          '<button class="btn btn-outline btn-sm" onclick="openEditProduct(\''+p.id+'\')"><i class="fas fa-edit"></i> Edit</button>' +
+          '<button class="btn btn-danger btn-sm" onclick="deleteProduct(\''+p.id+'\')"><i class="fas fa-trash"></i> Del</button>' +
+        '</div>' +
+        '</div>';
+    }).join('');
+  }
+
+  window.filterProducts = renderProducts;
+
+  function renderStats() {
+    var orders = allOrders;
+    var revenue = orders.reduce(function(s,o){ return s + parseFloat(o.total||0); }, 0);
+    var lowStock = allProducts.filter(function(p){ return p.stock !== undefined && p.stock <= (p.lowStock||5) && p.stock > 0; }).length;
+    document.getElementById('statsGrid').innerHTML = [
+      {i:'📦', v:allProducts.length, l:'Total Products'},
+      {i:'🛒', v:orders.length,       l:'Total Orders'},
+      {i:'💰', v:'$'+revenue.toFixed(2), l:'Total Revenue'},
+      {i:'⚠️', v:lowStock,            l:'Low Stock Items'}
+    ].map(function(s){
+      return '<div class="stat-card"><div class="si">'+s.i+'</div><div class="sv">'+s.v+'</div><div class="sl">'+s.l+'</div></div>';
+    }).join('');
+  }
+
+  document.getElementById('addProductBtn').addEventListener('click', openAddProduct);
+  document.getElementById('cancelFormBtn').addEventListener('click', closeProductForm);
+  document.getElementById('saveProductBtn').addEventListener('click', saveProduct);
+
+  function openAddProduct() {
+    editingProductId = null;
+    document.getElementById('formTitle').textContent = 'Add New Product';
+    document.getElementById('editId').value = '';
+    ['fNameEn','fNameAm','fSku','fSize','fCost','fPrice','fSalePrice','fSupplier','fStock','fLowStock','fCaseQty','fImage','fNotes'].forEach(function(id){ document.getElementById(id).value = ''; });
+    document.getElementById('fCategory').value = 'Drinks';
+    ['fFeatured','fSpecial','fLiquidation','fHabesha','fNoStock'].forEach(function(id){ document.getElementById(id).checked = false; });
+    document.getElementById('imgPreviewWrap').style.display = 'none';
+    document.getElementById('productForm').style.display = 'block';
+    document.getElementById('productForm').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  window.openEditProduct = function(id) {
+    var p = allProducts.find(function(x){ return String(x.id) === String(id); });
+    if (!p) return;
+    editingProductId = id;
+    document.getElementById('formTitle').textContent = 'Edit Product';
+    document.getElementById('editId').value = id;
+    document.getElementById('fNameEn').value = p.nameEn || '';
+    document.getElementById('fNameAm').value = p.nameAm || '';
+    document.getElementById('fSku').value = p.sku || '';
+    document.getElementById('fSize').value = p.size || '';
+    document.getElementById('fCategory').value = p.category || 'Drinks';
+    document.getElementById('fCost').value = p.cost || '';
+    document.getElementById('fPrice').value = p.price || '';
+    document.getElementById('fSalePrice').value = p.salePrice || '';
+    document.getElementById('fSupplier').value = p.supplier || '';
+    document.getElementById('fStock').value = p.stock !== undefined ? p.stock : '';
+    document.getElementById('fLowStock').value = p.lowStock || '';
+    document.getElementById('fCaseQty').value = p.caseQty || '';
+    document.getElementById('fImage').value = p.image || '';
+    document.getElementById('fNotes').value = p.notes || '';
+    document.getElementById('fFeatured').checked = !!p.isFeatured;
+    document.getElementById('fSpecial').checked = !!p.isSpecial;
+    document.getElementById('fLiquidation').checked = !!p.isLiquidation;
+    document.getElementById('fHabesha').checked = !!p.isHabesha;
+    document.getElementById('fNoStock').checked = !!p.isOutOfStock;
+    previewImage();
+    document.getElementById('productForm').style.display = 'block';
+    document.getElementById('productForm').scrollIntoView({behavior:'smooth',block:'start'});
+  };
+
+  window.previewImage = function() {
+    var url = document.getElementById('fImage').value.trim();
+    if (url) {
+      document.getElementById('imgPreview').src = url;
+      document.getElementById('imgPreviewWrap').style.display = 'flex';
+    } else {
+      document.getElementById('imgPreviewWrap').style.display = 'none';
+    }
+  };
+
+  function closeProductForm() {
+    document.getElementById('productForm').style.display = 'none';
+    editingProductId = null;
+  }
+
+  function saveProduct() {
+    var nameEn = document.getElementById('fNameEn').value.trim();
+    var price  = parseFloat(document.getElementById('fPrice').value);
+    if (!nameEn || isNaN(price) || price < 0) {
+      showToast('Please fill in Name (English) and Retail Price.', 'warn');
+      return;
+    }
+    var salePrice = parseFloat(document.getElementById('fSalePrice').value);
+    var stock     = parseInt(document.getElementById('fStock').value);
+    var lowStock  = parseInt(document.getElementById('fLowStock').value);
+    var caseQty   = parseInt(document.getElementById('fCaseQty').value);
+    var product = {
+      nameEn:        nameEn,
+      nameAm:        document.getElementById('fNameAm').value.trim() || nameEn,
+      sku:           document.getElementById('fSku').value.trim(),
+      size:          document.getElementById('fSize').value.trim(),
+      category:      document.getElementById('fCategory').value,
+      cost:          parseFloat(document.getElementById('fCost').value) || 0,
+      price:         price,
+      salePrice:     isNaN(salePrice) ? null : salePrice,
+      supplier:      document.getElementById('fSupplier').value.trim(),
+      stock:         isNaN(stock) ? 0 : stock,
+      lowStock:      isNaN(lowStock) ? 5 : lowStock,
+      caseQty:       isNaN(caseQty) ? 0 : caseQty,
+      image:         document.getElementById('fImage').value.trim() || 'https://via.placeholder.com/150',
+      notes:         document.getElementById('fNotes').value.trim(),
+      isFeatured:    document.getElementById('fFeatured').checked,
+      isSpecial:     document.getElementById('fSpecial').checked,
+      isLiquidation: document.getElementById('fLiquidation').checked,
+      isHabesha:     document.getElementById('fHabesha').checked,
+      isOutOfStock:  document.getElementById('fNoStock').checked,
+      updatedAt:     Date.now()
+    };
+
+    var products = allProducts.slice();
+    if (editingProductId) {
+      var idx = products.findIndex(function(p){ return String(p.id) === String(editingProductId); });
+      if (idx > -1) {
+        product.id = editingProductId;
+        products[idx] = product;
+      }
+    } else {
+      product.id = 'p_' + Date.now();
+      product.createdAt = Date.now();
+      products.push(product);
+    }
+
+    db.collection('koba_catalog').doc('products').set({ list: products, updatedAt: Date.now() })
+      .then(function(){ showToast('✅ Product saved successfully!', 'success'); closeProductForm(); })
+      .catch(function(e){ showToast('❌ Error: ' + e.message, 'error'); });
+  }
+
+  window.deleteProduct = function(id) {
+    showConfirm('Delete Product', 'Are you sure you want to delete this product? This cannot be undone.', function(){
+      var products = allProducts.filter(function(p){ return String(p.id) !== String(id); });
+      db.collection('koba_catalog').doc('products').set({ list: products, updatedAt: Date.now() })
+        .then(function(){ showToast('Product deleted.', 'success'); })
+        .catch(function(e){ showToast('Error: ' + e.message, 'error'); });
+    });
+  };
+
+  function loadOrders() {
+    db.collection('koba_orders').orderBy('createdAt', 'desc').limit(200).onSnapshot(function(snap){
+      allOrders = [];
+      snap.forEach(function(doc){ allOrders.push(Object.assign({id: doc.id}, doc.data())); });
+      renderOrders();
+      renderStats();
+    }, function(){
+      try { allOrders = JSON.parse(localStorage.getItem('koba_orders') || '[]'); } catch(e){}
+      renderOrders();
+      renderStats();
+    });
+  }
+
+  function ordersTableHTML(orders) {
+    if (orders.length === 0) {
+      return '<tr><td colspan="8"><div class="no-data"><i class="fas fa-inbox"></i>No orders yet.</div></td></tr>';
+    }
+    return orders.map(function(o, i){
+      return '<tr>' +
+        '<td style="color:var(--text-muted);font-size:0.75rem;">#'+(i+1)+'</td>' +
+        '<td style="font-weight:600;">'+(o.customer||'Customer')+'</td>' +
+        '<td>'+(o.phone||'—')+'</td>' +
+        '<td>'+(o.items||0)+' item(s)</td>' +
+        '<td style="font-weight:700;color:var(--accent);">$'+(o.total||'0.00')+'</td>' +
+        '<td><span style="font-size:0.8rem;">'+(o.deliveryType==='pickup'?'🏪 Pickup':'🚚 Delivery')+'</span></td>' +
+        '<td style="color:var(--text-muted);font-size:0.8rem;">'+(o.date||'')+'</td>' +
+        '<td><span class="status-badge '+(o.status||'sent')+'">'+(o.status||'sent')+'</span></td>' +
+        '</tr>';
+    }).join('');
+  }
+
+  function renderOrders() {
+    document.getElementById('ordersBody').innerHTML    = ordersTableHTML(allOrders.slice(0, 5));
+    document.getElementById('allOrdersBody').innerHTML = ordersTableHTML(allOrders);
+  }
+
+  document.getElementById('clearOrdersBtn').addEventListener('click', function(){
+    showConfirm('Clear All Orders', 'This will permanently delete all order records. Continue?', function(){
+      db.collection('koba_orders').get().then(function(snap){
+        var batch = db.batch();
+        snap.forEach(function(doc){ batch.delete(doc.ref); });
+        return batch.commit();
+      }).then(function(){ showToast('All orders cleared.', 'success'); })
+        .catch(function(){
+          localStorage.removeItem('koba_orders');
+          allOrders = [];
+          renderOrders();
+          renderStats();
+          showToast('Orders cleared.', 'success');
+        });
+    });
+  });
+
+  function loadSocial() {
+    db.collection('koba_social').doc('links').onSnapshot(function(doc){
+      if (doc.exists && doc.data() && Array.isArray(doc.data().list)) {
+        socialLinks = doc.data().list;
+      } else {
+        socialLinks = [];
+      }
+      renderSocial();
+    }, function(){
+      socialLinks = [];
+      renderSocial();
+    });
+  }
+
+  var SOCIAL_META = {
+    telegram:  { icon:'fab fa-telegram', color:'#229ED9', bg:'rgba(34,158,217,0.12)' },
+    whatsapp:  { icon:'fab fa-whatsapp', color:'#25D366', bg:'rgba(37,211,102,0.12)' },
+    instagram: { icon:'fab fa-instagram', color:'#E1306C', bg:'rgba(225,48,108,0.12)' },
+    tiktok:    { icon:'fab fa-tiktok',   color:'#000000', bg:'rgba(0,0,0,0.08)' },
+    facebook:  { icon:'fab fa-facebook', color:'#1877F2', bg:'rgba(24,119,242,0.12)' },
+    linkedin:  { icon:'fab fa-linkedin', color:'#0A66C2', bg:'rgba(10,102,194,0.12)' },
+    email:     { icon:'fas fa-envelope', color:'#C8A24A', bg:'rgba(200,162,74,0.12)' },
+    other:     { icon:'fas fa-link',     color:'#8a8a9a', bg:'rgba(138,138,154,0.12)' }
+  };
+
+  function renderSocial() {
+    var list = document.getElementById('socialList');
+    if (socialLinks.length === 0) {
+      list.innerHTML = '<p style="color:var(--text-muted);padding:1rem;">No social links yet. Click "Add Link" to add your first one.</p>';
+      return;
+    }
+    list.innerHTML = socialLinks.map(function(link, i){
+      var meta = SOCIAL_META[link.platform] || SOCIAL_META.other;
+      return '<div class="social-item">' +
+        '<div class="social-icon-badge" style="background:'+meta.bg+';color:'+meta.color+';">' +
+          '<i class="'+meta.icon+'"></i>' +
+        '</div>' +
+        '<div class="si-info">' +
+          '<div class="si-label">'+(link.label || link.platform)+'</div>' +
+          '<div class="si-url">'+link.url+'</div>' +
+        '</div>' +
+        '<div class="si-actions">' +
+          '<button class="btn btn-outline btn-sm" onclick="openEditSocial('+i+')"><i class="fas fa-edit"></i> Edit</button>' +
+          '<button class="btn btn-danger btn-sm" onclick="deleteSocial('+i+')"><i class="fas fa-trash"></i></button>' +
+        '</div>' +
+        '</div>';
+    }).join('');
+  }
+
+  document.getElementById('addSocialBtn').addEventListener('click', openAddSocial);
+  document.getElementById('cancelSocialBtn').addEventListener('click', closeSocialForm);
+  document.getElementById('saveSocialBtn').addEventListener('click', saveSocial);
+
+  function openAddSocial() {
+    editingSocialId = null;
+    document.getElementById('socialFormTitle').textContent = 'Add Social Link';
+    document.getElementById('sPlatform').value = 'telegram';
+    document.getElementById('sLabel').value = '';
+    document.getElementById('sUrl').value = '';
+    document.getElementById('socialForm').style.display = 'block';
+    document.getElementById('socialForm').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  window.openEditSocial = function(i) {
+    editingSocialId = i;
+    var link = socialLinks[i];
+    if (!link) return;
+    document.getElementById('socialFormTitle').textContent = 'Edit Social Link';
+    document.getElementById('sPlatform').value = link.platform || 'other';
+    document.getElementById('sLabel').value = link.label || '';
+    document.getElementById('sUrl').value = link.url || '';
+    document.getElementById('socialForm').style.display = 'block';
+    document.getElementById('socialForm').scrollIntoView({behavior:'smooth',block:'start'});
+  };
+
+  function closeSocialForm() {
+    document.getElementById('socialForm').style.display = 'none';
+    editingSocialId = null;
+  }
+
+  function saveSocial() {
+    var platform = document.getElementById('sPlatform').value;
+    var label    = document.getElementById('sLabel').value.trim();
+    var url      = document.getElementById('sUrl').value.trim();
+    if (!url) { showToast('Please enter a URL or handle.', 'warn'); return; }
+    var link = { platform: platform, label: label || platform, url: url };
+    var links = socialLinks.slice();
+    if (editingSocialId !== null) {
+      links[editingSocialId] = link;
+    } else {
+      links.push(link);
+    }
+    db.collection('koba_social').doc('links').set({ list: links, updatedAt: Date.now() })
+      .then(function(){ showToast('✅ Social link saved!', 'success'); closeSocialForm(); })
+      .catch(function(e){ showToast('Error: ' + e.message, 'error'); });
+  }
+
+  window.deleteSocial = function(i) {
+    showConfirm('Delete Link', 'Remove this social media link?', function(){
+      var links = socialLinks.filter(function(_, idx){ return idx !== i; });
+      db.collection('koba_social').doc('links').set({ list: links, updatedAt: Date.now() })
+        .then(function(){ showToast('Link deleted.', 'success'); })
+        .catch(function(e){ showToast('Error: ' + e.message, 'error'); });
+    });
+  };
+
+  function loadSettings() {
+    db.collection('koba_settings').doc('store').get().then(function(doc){
+      var s = (doc.exists && doc.data()) ? doc.data() : {};
+      if (s.storeName) document.getElementById('sStoreName').value = s.storeName;
+      if (s.tagline)   document.getElementById('sTagline').value = s.tagline;
+      if (s.phone)     document.getElementById('sPhone').value = s.phone;
+      if (s.email)     document.getElementById('sEmail').value = s.email;
+      if (s.address)   document.getElementById('sAddress').value = s.address;
+      if (s.hours)     document.getElementById('sHours').value = s.hours;
+      if (s.whatsapp)  document.getElementById('sWhatsapp').value = s.whatsapp;
+      if (s.deliveryFee !== undefined) document.getElementById('sDeliveryFee').value = s.deliveryFee;
+    }).catch(function(){});
+  }
+
+  document.getElementById('saveSettingsBtn').addEventListener('click', function(){
+    var settings = {
+      storeName:   document.getElementById('sStoreName').value.trim(),
+      tagline:     document.getElementById('sTagline').value.trim(),
+      phone:       document.getElementById('sPhone').value.trim(),
+      email:       document.getElementById('sEmail').value.trim(),
+      address:     document.getElementById('sAddress').value.trim(),
+      hours:       document.getElementById('sHours').value.trim(),
+      whatsapp:    document.getElementById('sWhatsapp').value.trim(),
+      deliveryFee: parseInt(document.getElementById('sDeliveryFee').value) || 10,
+      updatedAt:   Date.now()
+    };
+    db.collection('koba_settings').doc('store').set(settings)
+      .then(function(){ showToast('✅ Settings saved!', 'success'); })
+      .catch(function(e){ showToast('Error: ' + e.message, 'error'); });
+  });
+
+  // ============================================================
+  // ADMIN USERS MANAGEMENT (CRUD & PASSWORD CHANGE)
+  // ============================================================
+  window.togglePasswordVisibility = function(inputId, btn) {
+    var inp = document.getElementById(inputId);
+    if (!inp) return;
+    if (inp.type === 'password') {
+      inp.type = 'text';
+      btn.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    } else {
+      inp.type = 'password';
+      btn.innerHTML = '<i class="fas fa-eye"></i>';
+    }
+  };
+
+  window.toggleTableRowPassword = function(idx, btn) {
+    var span = document.getElementById('pwdText_' + idx);
+    if (!span) return;
+    var user = adminUsers[idx];
+    if (!user) return;
+    if (span.dataset.revealed === 'true') {
+      span.textContent = '••••••••';
+      span.dataset.revealed = 'false';
+      btn.innerHTML = '<i class="fas fa-eye"></i>';
+    } else {
+      span.textContent = user.password;
+      span.dataset.revealed = 'true';
+      btn.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    }
+  };
+
+  function loadAdminUsers() {
+    db.collection('koba_settings').doc('admin_users').onSnapshot(function(doc) {
+      if (doc.exists && doc.data() && Array.isArray(doc.data().list)) {
+        adminUsers = doc.data().list;
+      } else {
+        adminUsers = DEFAULT_ADMINS.slice();
+        // initialize in firestore if not set
+        db.collection('koba_settings').doc('admin_users').set({ list: adminUsers, updatedAt: Date.now() }).catch(function(){});
+      }
+      renderAdminUsers();
+    }, function(err) {
+      adminUsers = DEFAULT_ADMINS.slice();
+      renderAdminUsers();
+    });
+  }
+
+  function renderAdminUsers() {
+    var tbody = document.getElementById('adminUsersBody');
+    var countEl = document.getElementById('userCount');
+    if (countEl) countEl.textContent = adminUsers.length;
+    if (!tbody) return;
+
+    if (adminUsers.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5" class="no-data"><i class="fas fa-users-slash"></i>No admin users found.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = adminUsers.map(function(u, idx) {
+      var initial = (u.displayName || u.username || 'A').charAt(0).toUpperCase();
+      var roleClass = u.role === 'Super Admin' ? 'role-super' : (u.role === 'Store Manager' ? 'role-manager' : 'role-staff');
+      return '<tr>' +
+        '<td>' +
+          '<div style="display:flex;align-items:center;gap:0.7rem;">' +
+            '<div class="user-avatar">' + initial + '</div>' +
+            '<div>' +
+              '<div style="font-weight:700;color:var(--text-primary);font-size:0.9rem;">' + (u.displayName || 'Admin') + '</div>' +
+              '<div style="font-size:0.75rem;color:var(--text-muted);">' + u.username + '</div>' +
+            '</div>' +
+          '</div>' +
+        '</td>' +
+        '<td><span class="role-badge ' + roleClass + '">' + (u.role || 'Super Admin') + '</span></td>' +
+        '<td>' +
+          '<div class="pwd-cell">' +
+            '<span id="pwdText_' + idx + '" data-revealed="false">••••••••</span>' +
+            '<button type="button" class="pwd-toggle-btn" style="position:static;" onclick="toggleTableRowPassword(' + idx + ', this)" title="Show/Hide Password">' +
+              '<i class="fas fa-eye"></i>' +
+            '</button>' +
+          '</div>' +
+        '</td>' +
+        '<td><span style="font-size:0.8rem;color:var(--text-muted);">' + (u.createdAt || '2026-09-14') + '</span></td>' +
+        '<td>' +
+          '<div style="display:flex;gap:0.4rem;">' +
+            '<button class="btn btn-outline btn-sm" onclick="openEditUser(' + idx + ')"><i class="fas fa-edit"></i> Edit</button>' +
+            '<button class="btn btn-danger btn-sm" onclick="deleteUser(' + idx + ')" ' + (adminUsers.length <= 1 ? 'disabled title="Cannot delete the only admin"' : '') + '><i class="fas fa-trash"></i></button>' +
+          '</div>' +
+        '</td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  document.getElementById('addUserBtn').addEventListener('click', function() {
+    document.getElementById('userFormTitle').textContent = 'Add New Admin User';
+    document.getElementById('uEditId').value = '';
+    document.getElementById('uUsername').value = '';
+    document.getElementById('uDisplayName').value = '';
+    document.getElementById('uPassword').value = '';
+    document.getElementById('uRole').value = 'Super Admin';
+    document.getElementById('userFormCard').style.display = 'block';
+    document.getElementById('userFormCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  });
+
+  document.getElementById('cancelUserBtn').addEventListener('click', function() {
+    document.getElementById('userFormCard').style.display = 'none';
+  });
+
+  window.openEditUser = function(idx) {
+    var u = adminUsers[idx];
+    if (!u) return;
+    document.getElementById('userFormTitle').textContent = 'Edit Admin User (' + u.username + ')';
+    document.getElementById('uEditId').value = idx;
+    document.getElementById('uUsername').value = u.username;
+    document.getElementById('uDisplayName').value = u.displayName || '';
+    document.getElementById('uPassword').value = u.password;
+    document.getElementById('uRole').value = u.role || 'Super Admin';
+    document.getElementById('userFormCard').style.display = 'block';
+    document.getElementById('userFormCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  };
+
+  document.getElementById('saveUserBtn').addEventListener('click', function() {
+    var editIdx = document.getElementById('uEditId').value;
+    var username = document.getElementById('uUsername').value.trim();
+    var displayName = document.getElementById('uDisplayName').value.trim();
+    var password = document.getElementById('uPassword').value;
+    var role = document.getElementById('uRole').value;
+
+    if (!username) { showToast('Please enter a username or email.', 'warn'); return; }
+    if (!displayName) { showToast('Please enter a display name.', 'warn'); return; }
+    if (!password || password.length < 6) { showToast('Password must be at least 6 characters.', 'warn'); return; }
+
+    var updatedList = adminUsers.slice();
+
+    if (editIdx !== '') {
+      var i = parseInt(editIdx, 10);
+      updatedList[i] = Object.assign({}, updatedList[i], {
+        username: username,
+        displayName: displayName,
+        password: password,
+        role: role,
+        updatedAt: new Date().toISOString().split('T')[0]
+      });
+    } else {
+      var exists = updatedList.some(function(u) { return u.username.toLowerCase() === username.toLowerCase(); });
+      if (exists) { showToast('An admin with this username already exists.', 'warn'); return; }
+      updatedList.push({
+        id: 'usr_' + Date.now(),
+        username: username,
+        displayName: displayName,
+        password: password,
+        role: role,
+        createdAt: new Date().toISOString().split('T')[0]
+      });
+    }
+
+    db.collection('koba_settings').doc('admin_users').set({
+      list: updatedList,
+      updatedAt: Date.now()
+    }).then(function() {
+      showToast('✅ Admin user saved successfully!', 'success');
+      document.getElementById('userFormCard').style.display = 'none';
+    }).catch(function(err) {
+      showToast('Error saving user: ' + err.message, 'error');
+    });
+  });
+
+  window.deleteUser = function(idx) {
+    if (adminUsers.length <= 1) {
+      showToast('Cannot delete the last admin user.', 'warn');
+      return;
+    }
+    var u = adminUsers[idx];
+    showConfirm('Delete Admin User', 'Are you sure you want to remove "' + u.username + '"? They will no longer have access to the portal.', function() {
+      var updated = adminUsers.filter(function(_, i) { return i !== idx; });
+      db.collection('koba_settings').doc('admin_users').set({
+        list: updated,
+        updatedAt: Date.now()
+      }).then(function() {
+        showToast('Admin user removed.', 'success');
+      }).catch(function(err) {
+        showToast('Error: ' + err.message, 'error');
+      });
+    });
+  };
+
+  // Settings tab: Change Password for Currently Logged-in Admin
+  document.getElementById('changePwdBtn').addEventListener('click', function() {
+    var np = document.getElementById('newPwd').value;
+    var cp = document.getElementById('confirmPwd').value;
+    if (np.length < 6) { showToast('Password must be at least 6 characters.', 'warn'); return; }
+    if (np !== cp)     { showToast('Passwords do not match.', 'warn'); return; }
+
+    var currentEmail = (sessionStorage.getItem('koba_admin_email') || 'admin@kobastore.com').toLowerCase();
+    var updatedList = adminUsers.slice();
+    var targetIdx = updatedList.findIndex(function(u) {
+      return u.username.toLowerCase() === currentEmail;
+    });
+
+    if (targetIdx !== -1) {
+      updatedList[targetIdx].password = np;
+      updatedList[targetIdx].updatedAt = new Date().toISOString().split('T')[0];
+    } else {
+      updatedList.push({
+        id: 'usr_' + Date.now(),
+        username: currentEmail,
+        displayName: 'Administrator',
+        password: np,
+        role: 'Super Admin',
+        updatedAt: new Date().toISOString().split('T')[0]
+      });
+    }
+
+    db.collection('koba_settings').doc('admin_users').set({
+      list: updatedList,
+      updatedAt: Date.now()
+    }).then(function() {
+      showToast('✅ Password updated successfully! Use your new password next time.', 'success');
+      document.getElementById('newPwd').value = '';
+      document.getElementById('confirmPwd').value = '';
+    }).catch(function(err) {
+      showToast('Error: ' + err.message, 'error');
+    });
+  });
+
+  function showToast(msg, type) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.background = type==='success'?'#22c55e':type==='warn'?'#eab308':'#ef4444';
+    t.style.color = '#fff';
+    t.style.opacity = '1';
+    t.style.transform = 'translateY(0)';
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function(){ t.style.opacity='0'; t.style.transform='translateY(20px)'; }, 3500);
+  }
+
+  function showConfirm(title, msg, cb) {
+    document.getElementById('confirmTitle').textContent = title;
+    document.getElementById('confirmMsg').textContent = msg;
+    confirmCallback = cb;
+    document.getElementById('confirmOverlay').classList.add('active');
+  }
+  document.getElementById('confirmYes').addEventListener('click', function(){
+    document.getElementById('confirmOverlay').classList.remove('active');
+    if (confirmCallback) { confirmCallback(); confirmCallback = null; }
+  });
+  document.getElementById('confirmNo').addEventListener('click', function(){
+    document.getElementById('confirmOverlay').classList.remove('active');
+    confirmCallback = null;
+  });
+  document.getElementById('confirmOverlay').addEventListener('click', function(e){
+    if (e.target === this) { this.classList.remove('active'); confirmCallback = null; }
+  });
+
+})();
+</script>
+</body>
+</html>
